@@ -10,15 +10,16 @@
  */
 package org.mypackage.client.view;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
+import com.googlecode.mgwt.ui.client.widget.Button;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
-import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
-import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
-import org.mypackage.client.map.TMSMap;
+import org.mypackage.client.map.GeomajasMap;
+import org.mypackage.client.widget.zoom.MobileZoomView;
+import org.mypackage.client.widget.zoom.MobileZoomViewImpl;
 
 /**
  * Implementation of {@link org.mypackage.client.view.MobileMapView} .
@@ -26,42 +27,31 @@ import org.mypackage.client.map.TMSMap;
  * @author Dosi Bingov
  */
 public class MobileMapViewImpl implements MobileMapView {
-	protected SimplePanel panel;
-
-	protected LayoutPanel main;
-	protected HeaderPanel headerPanel;
-	protected HeaderButton legendButton;
+	protected Button legendButton;
 	protected HTML title;
-	protected TMSMap tmsMap;
+	protected GeomajasMap geomajasMap;
+	private MobileZoomView zoomControl;
+
 
 	public MobileMapViewImpl() {
-		panel = new SimplePanel();
-	    tmsMap = new TMSMap();
-		main = new LayoutPanel();
-
-
-		headerPanel = new HeaderPanel();
+		geomajasMap = new GeomajasMap();
 		title = new HTML();
-		headerPanel.setCenterWidget(title);
-		legendButton = new HeaderButton();
+		legendButton = new Button();
+		legendButton.setSmall(true);
+		legendButton.getElement().getStyle().setOpacity(0.6);
+		legendButton.getElement().getStyle().setRight(2, Style.Unit.PX);
+		legendButton.getElement().getStyle().setTop(2, Style.Unit.PX);
 
-		headerPanel.setRightWidget(legendButton);
-
-
-
-		main.add(headerPanel);
-		main.add(tmsMap.asWidget());
-
+		zoomControl = new MobileZoomViewImpl();
+		zoomControl.asWidget().getElement().getStyle().setLeft(2, Style.Unit.PX);
+		zoomControl.asWidget().getElement().getStyle().setTop(2, Style.Unit.PX);
+		geomajasMap.getMapPresenter().getWidgetPane().add(zoomControl.asWidget());
+		geomajasMap.getMapPresenter().getWidgetPane().add(legendButton);
 	}
 
 	@Override
 	public Widget asWidget() {
-		return main;
-	}
-
-	@Override
-	public HasText getHeader() {
-		return title;
+		return geomajasMap.asWidget();
 	}
 
 	@Override
@@ -74,4 +64,13 @@ public class MobileMapViewImpl implements MobileMapView {
 		return legendButton;
 	}
 
+	@Override
+	public GeomajasMap getMap() {
+		return geomajasMap;
+	}
+
+	@Override
+	public MobileZoomView getZoomControl() {
+		return zoomControl;
+	}
 }

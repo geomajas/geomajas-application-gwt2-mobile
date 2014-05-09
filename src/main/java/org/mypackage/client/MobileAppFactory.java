@@ -14,6 +14,7 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 import org.mypackage.client.view.LegendView;
 import org.mypackage.client.view.MobileMapView;
+import org.mypackage.client.widget.layerlist.LayerListView;
 
 /**
  * Factory interface for this mobile application.
@@ -37,5 +38,7 @@ public interface MobileAppFactory {
 	public MobileMapView getMapView();
 
  	public LegendView getLegendView();
+
+	public LayerListView getlayerListView();
 
 }

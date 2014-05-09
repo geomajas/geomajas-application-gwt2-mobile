@@ -8,23 +8,21 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.mypackage.client.view;
+package org.mypackage.client.widget.layerlist;
 
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
-import org.mypackage.client.map.GeomajasMap;
-import org.mypackage.client.widget.zoom.MobileZoomView;
+import com.googlecode.mgwt.ui.client.widget.WidgetList;
 
 /**
- * Mobile map view interface.
+ * Layer List record view interface.
+ *
+ * @author Dosi Bingov.
  */
-public interface MobileMapView extends IsWidget{
-	public HasText getLegendButtonText();
-	
-	public HasTapHandlers getLegendButton();
+public interface LayerListView extends IsWidget {
 
-	public GeomajasMap getMap();
+	WidgetList getList();
 
-	public MobileZoomView getZoomControl();
+	boolean isListRendered();
+
+	void markRendered();
 }

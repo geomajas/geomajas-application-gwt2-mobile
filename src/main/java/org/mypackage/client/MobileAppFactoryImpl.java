@@ -17,6 +17,8 @@ import org.mypackage.client.view.LegendView;
 import org.mypackage.client.view.LegendViewImpl;
 import org.mypackage.client.view.MobileMapView;
 import org.mypackage.client.view.MobileMapViewImpl;
+import org.mypackage.client.widget.layerlist.LayerListView;
+import org.mypackage.client.widget.layerlist.LayerListViewImpl;
 
 /**
  * @author Dosi Bingov
@@ -30,6 +32,8 @@ public class MobileAppFactoryImpl implements MobileAppFactory {
 	private MobileMapView mapView;
 
 	private LegendView legendView;
+
+	private LayerListView layerListView;
 
 
 	public MobileAppFactoryImpl() {
@@ -63,6 +67,7 @@ public class MobileAppFactoryImpl implements MobileAppFactory {
 		if (mapView == null) {
 			mapView = new MobileMapViewImpl();
 		}
+
 		return mapView;
 	}
 
@@ -72,6 +77,15 @@ public class MobileAppFactoryImpl implements MobileAppFactory {
 			legendView = new LegendViewImpl();
 		}
 		return legendView;
+	}
+
+	@Override
+	public LayerListView getlayerListView() {
+		if (layerListView == null) {
+			layerListView = new LayerListViewImpl();
+		}
+
+		return layerListView;
 	}
 
 }

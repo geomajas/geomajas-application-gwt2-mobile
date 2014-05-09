@@ -8,23 +8,21 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.mypackage.client.view;
+package org.mypackage.client.widget.zoom;
 
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 import org.mypackage.client.map.GeomajasMap;
-import org.mypackage.client.widget.zoom.MobileZoomView;
 
 /**
- * Mobile map view interface.
+ * Mobile zoom interface.
+ *
+ * @author Dosi Bingov.
  */
-public interface MobileMapView extends IsWidget{
-	public HasText getLegendButtonText();
-	
-	public HasTapHandlers getLegendButton();
+public interface MobileZoomView extends IsWidget{
+	public HasTapHandlers getZoomInButton();
 
-	public GeomajasMap getMap();
+	public HasTapHandlers getZoomOutButton();
 
-	public MobileZoomView getZoomControl();
 }

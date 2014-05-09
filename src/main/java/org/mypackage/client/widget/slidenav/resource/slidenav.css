@@ -1,0 +1,124 @@
+/* Nav slide layout css */
+
+@sprite .navMenuSpriteIcon {
+    gwt-image: 'navButtonSprite';
+    background-position: left top;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 27px;
+    width: 33px;
+}
+
+body {
+    margin: 0;
+}
+
+@external .pushmenu;
+
+.pushmenu {
+    background: #3c3933;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    width: 240px;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+@external .pushmenu h3;
+
+.pushmenu h3 {
+    color: #cbbfad;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 20px;
+    margin: 0;
+    background: #282522;
+    height: 16px;
+}
+
+
+@external .menuRecord;
+@external .pushmenu .menuRecord;
+.pushmenu .menuRecord {
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-top: 1px solid #57544e;
+    border-bottom: 1px solid #312e2a;
+    padding: 14px;
+}
+
+@external .pushmenu:hover;
+.pushmenu a:hover {
+    background:#258ecd;
+}
+
+
+@external .pushmenu:active;
+.pushmenu a:active {
+    background: #454f5c;
+    color: #fff;
+}
+
+
+@external .pushmenu-left;
+.pushmenu-left {
+    left: -240px;
+}
+
+@external .pushmenu-left.pushmenu-open;
+.pushmenu-left.pushmenu-open {
+    left: 0px;
+}
+
+@external .pushmenu-push;
+.pushmenu-push {
+    overflow-x: hidden;
+    position: absolute;
+    left: 0;
+}
+@external .pushmenu-push-toright;
+.pushmenu-push-toright {
+    left: 240px;
+}
+
+/* css transitions */
+
+.pushmenu, .pushmenu-push {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+@external .navButton;
+.navButton {
+    text-indent: -99999em;
+    border: none;
+    padding: 0;
+}
+
+@external active;
+
+.navButton.active {
+    background-position: -33px top;
+}
+
+@external .buttonset;
+
+.buttonset {
+    background: linear-gradient(center top , #6b85b3, #334d86);
+    background:-moz-linear-gradient(center top , #6b85b3, #334d86);
+    background: -webkit-gradient(linear, center top, center bottom, from(#6b85b3), to(#334d86));
+    height: 40px;
+}
+
+@external section;
+
+@external content;
+
+section.content {
+
+}

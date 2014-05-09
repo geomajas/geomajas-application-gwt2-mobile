@@ -25,7 +25,37 @@
             classpath:org/geomajas/plugin/rasterizing/DefaultRasterizedPipelines.xml
 
             <!-- local application context -->
+
+
+            WEB-INF/map/mapLayerVisibility.xml
+            WEB-INF/map/mapMain.xml
             WEB-INF/applicationContext.xml
+
+            <!-- OSM layer -->
+            WEB-INF/layer/OSM/clientLayerOsm.xml
+            WEB-INF/layer/OSM/layerOsm.xml
+
+            <!-- TMS layer -->
+            WEB-INF/layer/TMS/clientLayerSimplifiedCountriesTms.xml
+            WEB-INF/layer/TMS/layerSimplifiedCountriesTms.xml
+
+            <!-- WMS layer -->
+            WEB-INF/layer/WMS/clientLayerSimplifiedCountriesWms.xml
+            WEB-INF/layer/WMS/layerSimplifiedCountriesWms.xml
+
+            <!-- WFS layer -->
+            <!--WEB-INF/layer/WFS/layerSimplifiedCountriesWFS.xml-->
+            <!--WEB-INF/layer/WFS/clientLayerSimplifiedCountriesWfs.xml-->
+
+            <!-- layers based on a SHP file -->
+            WEB-INF/layer/SHP/layerCountries110m.xml
+            WEB-INF/layer/SHP/layerCountries.xml
+            WEB-INF/layer/SHP/clientLayerCountries.xml
+            WEB-INF/layer/SHP/layerCities.xml
+            WEB-INF/layer/SHP/clientLayerCities.xml
+            WEB-INF/layer/SHP/layerCountriesWithFlag.xml
+            WEB-INF/layer/SHP/clientLayerCountriesWithFlag.xml
+
 
             <!-- security -->
             WEB-INF/security.xml

@@ -100,6 +100,12 @@
             <artifactId>geomajas-layer-tms</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.geomajas.plugin</groupId>
+            <artifactId>geomajas-client-gwt2-plugin-wms</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-wfs</artifactId>
@@ -111,6 +117,12 @@
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-layer-hibernate</artifactId>
 		</dependency>
+
+
+        <dependency>
+            <groupId>org.geomajas.plugin</groupId>
+            <artifactId>geomajas-client-gwt2-plugin-corewidget</artifactId>
+        </dependency>
 		<!-- uncomment if you want to use Hibernate with postgis, for another db you will need similar dependencies -->
 		<!-- (see also web.xml for changing the configuration) -->
 		<!--
@@ -221,8 +233,8 @@
 
         <!--  hammer gwt-->
         <dependency>
-            <groupId>org.hammergwt</groupId>
-            <artifactId>hammer-gwt-impl</artifactId>
+            <groupId>org.geomajas.hammergwt</groupId>
+            <artifactId>geomajas-project-hammer-gwt-impl</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

@@ -22,9 +22,11 @@
 
 
     <inherits name="com.google.gwt.user.User" />
-    <inherits name="org.hammergwt.HammerGWT_Min" />
+    <inherits name="org.geomajas.hammergwt.HammerGWT_Min" />
     <inherits name="com.googlecode.mgwt.MGWT" />
     <inherits name="com.googlecode.mgwt.linker.Linker" />
+    <inherits name="org.geomajas.gwt2.widget.GeomajasGwtWidget"/>
+    <inherits name="org.geomajas.plugin.wms.GeomajasClientPluginWms"/>
     <!-- 	<inherits name="com.googlecode.mgwt.theme.ExampleTheme"/> -->
 
 
@@ -56,7 +58,8 @@
     <extend-configuration-property name="html5manifestlinker_files" value="index.html" />
     <extend-configuration-property name="html5manifestlinker_files" value="logo.png" />
 
-    <set-configuration-property name="CssResource.obfuscationPrefix" value="emtpy"/>
+    <!--   set gm (geomajas prefix) for css classes -->
+    <set-configuration-property name="CssResource.obfuscationPrefix" value="gm"/>
     <set-property name="compiler.stackMode" value="strip"/>
     <set-configuration-property name="compiler.enum.obfuscate.names" value="true"/>
 

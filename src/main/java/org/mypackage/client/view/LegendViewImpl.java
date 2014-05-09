@@ -14,10 +14,20 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
+import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
 import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
 import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
+import com.googlecode.mgwt.ui.client.widget.MCheckBox;
 import com.googlecode.mgwt.ui.client.widget.ScrollPanel;
+import com.googlecode.mgwt.ui.client.widget.WidgetList;
+import com.googlecode.mgwt.ui.client.widget.celllist.HasCellSelectedHandler;
+import org.mypackage.client.view.cellist.LayerCell;
+import org.mypackage.client.view.cellist.LayerCellRecord;
+import org.mypackage.client.widget.layerlist.LayerListRecordViewImpl;
+import org.mypackage.client.widget.layerlist.LayerListView;
+
+import java.util.List;
 
 public class LegendViewImpl implements LegendView {
 
@@ -26,7 +36,10 @@ public class LegendViewImpl implements LegendView {
 	protected HeaderPanel headerPanel;
 	protected HeaderButton headerBackButton;
 	protected HeaderButton headerMainButton;
+/*	private CellList<LayerCellRecord> cellListWithHeader;*/
 	protected HTML title;
+
+
 
 	public LegendViewImpl() {
 		main = new LayoutPanel();
@@ -43,6 +56,28 @@ public class LegendViewImpl implements LegendView {
 		headerMainButton.setRoundButton(true);
 
 		headerPanel.setLeftWidget(headerBackButton);
+
+		/*cellListWithHeader = new CellList<LayerCellRecord>(new LayerCell<LayerCellRecord>() {
+
+			@Override
+			public String getDisplayString(LayerCellRecord model) {
+				return model.getName();
+			}
+
+			@Override
+			public boolean isLayerVisible(LayerCellRecord model) {
+				return model.isVisible();
+			}
+
+			@Override
+			public boolean canBeSelected(LayerCellRecord model) {
+				return true;
+			}
+		});
+
+		cellListWithHeader.setRound(true);*/
+
+		scrollPanel.setScrollingEnabledX(false);
 
 		main.add(headerPanel);
 		main.add(scrollPanel);
@@ -68,5 +103,24 @@ public class LegendViewImpl implements LegendView {
 		return headerBackButton;
 	}
 
+	/*@Override
+	public void renderRecords(List<LayerCellRecord> records) {
+		cellListWithHeader.render(records);
+	}
+
+	@Override
+	public void setSelectedIndex(int index, boolean selected) {
+		cellListWithHeader.setSelectedIndex(index, selected);
+	}
+
+	@Override
+	public HasCellSelectedHandler getList() {
+		return cellListWithHeader;
+	}
+*/
+	@Override
+	public void setLayerListView(LayerListView layerListView) {
+		scrollPanel.setWidget(layerListView);
+	}
 
 }

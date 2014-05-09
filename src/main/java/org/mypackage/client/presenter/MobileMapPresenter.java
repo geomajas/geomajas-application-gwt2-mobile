@@ -6,5 +6,5 @@ package org.mypackage.client.presenter;
  * @author Dosi Bingov
  */
 public interface MobileMapPresenter {
-
+	void refreshMap();
 }

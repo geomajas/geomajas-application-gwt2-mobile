@@ -15,7 +15,12 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
+import com.googlecode.mgwt.mvp.client.MGWTAnimationEndEvent;
+import com.googlecode.mgwt.mvp.client.MGWTAnimationEndHandler;
 import com.googlecode.mgwt.ui.client.event.ShowMasterEvent;
+import org.geomajas.gwt2.client.animation.NavigationAnimationFactory;
+import org.geomajas.gwt2.client.map.ViewPort;
+import org.geomajas.gwt2.client.map.render.RenderMapEvent;
 import org.mypackage.client.MobileAppFactory;
 import org.mypackage.client.event.ActionEvent;
 import org.mypackage.client.animation.ActionNames;
@@ -40,18 +45,67 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
   @Override
   public void start(AcceptsOneWidget panel, final EventBus eventBus) {
 
+
     addHandlerRegistration(mapView.getLegendButton().addTapHandler(new TapHandler() {
 
-      @Override
-      public void onTap(TapEvent event) {
-		  ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.LEGEND);
-      }
+		@Override
+		public void onTap(TapEvent event) {
+			ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.LEGEND);
+		}
 
-    }));
+	}));
 
-	  mapView.getHeader().setText("Map view");
-	  mapView.getLegendButtonText().setText("Legend");
+	  mapView.getZoomControl().getZoomInButton().addTapHandler(new TapHandler() {
+
+		  @Override
+		  public void onTap(TapEvent event) {
+
+			 ViewPort viewPort = mapView.getMap().getMapPresenter().getViewPort();
+			  int index = viewPort.getResolutionIndex(viewPort.getResolution());
+			  if (index < viewPort.getResolutionCount() - 1) {
+				  viewPort.registerAnimation(NavigationAnimationFactory.createZoomIn(mapView.getMap().getMapPresenter()));
+			  }
+		  }
+	  });
+
+	  mapView.getZoomControl().getZoomOutButton().addTapHandler(new TapHandler() {
+
+		  @Override
+		  public void onTap(TapEvent event) {
+			  ViewPort viewPort = mapView.getMap().getMapPresenter().getViewPort();
+
+			  int index = viewPort.getResolutionIndex(viewPort.getResolution());
+			  if (index > 0) {
+				  viewPort.registerAnimation(NavigationAnimationFactory.createZoomOut(mapView.getMap().getMapPresenter()));
+			  }
+		  }
+	  });
+
+	  mapView.getLegendButtonText().setText("Layers");
+
+	  eventBus.addHandler(MGWTAnimationEndEvent.getType(), new MapActivityAnimationEndHandler());
 
 	  panel.setWidget(mapView);
   }
+
+
+	@Override
+	public void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	public void refreshMap() {
+		mapView.getMap().getMapPresenter().getEventBus().fireEvent(new RenderMapEvent());
+	}
+
+	private class MapActivityAnimationEndHandler implements MGWTAnimationEndHandler {
+
+		@Override
+		public void onAnimationEnd(MGWTAnimationEndEvent event) {
+			event.getSource();
+			refreshMap();
+		}
+	}
+
 }

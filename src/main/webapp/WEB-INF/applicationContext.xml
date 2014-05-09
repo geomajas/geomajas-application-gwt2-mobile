@@ -34,11 +34,12 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<bean name="app"
 		class="org.geomajas.configuration.client.ClientApplicationInfo">
-		<!--<property name="maps">
+		<property name="maps">
 			<list>
 				<ref bean="mapMain" />
+                <ref bean="mapLayerVisibility" />
 			</list>
-		</property>-->
+		</property>
 <!--
 		<property name="widgetInfo">
 		</property>
