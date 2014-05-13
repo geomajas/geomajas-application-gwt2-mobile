@@ -1,23 +1,11 @@
 package org.mypackage.client.widget.layerlist;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
-import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
-import org.geomajas.gwt2.client.event.LayerHideEvent;
-import org.geomajas.gwt2.client.event.LayerShowEvent;
-import org.geomajas.gwt2.client.event.LayerVisibilityHandler;
-import org.geomajas.gwt2.client.event.LayerVisibilityMarkedEvent;
 import org.geomajas.gwt2.client.map.MapEventBus;
 import org.geomajas.gwt2.client.map.layer.Layer;
 import org.geomajas.gwt2.client.map.layer.LayersModel;
 import org.mypackage.client.MobileAppFactory;
-import org.mypackage.client.view.cellist.LayerCellRecord;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Layer List presenter.
@@ -26,12 +14,12 @@ import java.util.List;
  */
 public class LayerListPresenterImpl implements LayerListPresenter {
 
-	private LayerListView layerListView;
+	private LayerListView view;
 
 	private MapEventBus mapEventBus;
 
-	public LayerListPresenterImpl(MapEventBus mapEventBus, MobileAppFactory mobileAppFactory) {
-		this.layerListView = mobileAppFactory.getlayerListView();
+	public LayerListPresenterImpl(MapEventBus mapEventBus, LayerListView view) {
+		this.view = view;
 		this.mapEventBus = mapEventBus;
 
 	}
@@ -40,24 +28,24 @@ public class LayerListPresenterImpl implements LayerListPresenter {
 	public void renderLayerRecords(LayersModel layerModel) {
 
 		//TODO: we don't always want that.
-		if(!layerListView.isListRendered()) {
+		if(!view.isListRendered()) {
 
 			for (int i = layerModel.getLayerCount() - 1; i >= 0; i--) {
 				addLayer(layerModel.getLayer(i));
 			}
 
-			layerListView.markRendered();
+			view.markRendered();
 		}
 	}
 
 	@Override
 	public LayerListView getLayerList() {
-		return layerListView;
+		return view;
 	}
 
 	private void addLayer(Layer layer) {
 		LayerListRecordView recordView = new LayerListRecordViewImpl(layer);
-		layerListView.getList().add(recordView.asWidget());
+		view.getList().add(recordView.asWidget());
 		addLayerRecordEvents(recordView);
 	}
 

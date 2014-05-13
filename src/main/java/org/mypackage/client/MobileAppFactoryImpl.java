@@ -11,12 +11,16 @@
 package org.mypackage.client;
 
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
+import org.mypackage.client.map.MapHammerController;
 import org.mypackage.client.view.LegendView;
 import org.mypackage.client.view.LegendViewImpl;
 import org.mypackage.client.view.MobileMapView;
 import org.mypackage.client.view.MobileMapViewImpl;
+import org.mypackage.client.widget.feature.FeatureInfoSlideUpView;
+import org.mypackage.client.widget.feature.FeatureInfoSlideUpViewImpl;
 import org.mypackage.client.widget.layerlist.LayerListView;
 import org.mypackage.client.widget.layerlist.LayerListViewImpl;
 
@@ -35,21 +39,12 @@ public class MobileAppFactoryImpl implements MobileAppFactory {
 
 	private LayerListView layerListView;
 
+	private FeatureInfoSlideUpView featureInfoSlideUpView;
+
 
 	public MobileAppFactoryImpl() {
 		eventBus = new SimpleEventBus();
-
 		placeController = new PlaceController(eventBus);
-
-		mapView = new MobileMapViewImpl();
-	}
-
-	@Override
-	public MobileMapView getHomeView() {
-		if (mapView == null) {
-			mapView = new MobileMapViewImpl();
-		}
-		return mapView;
 	}
 
 	@Override
@@ -86,6 +81,15 @@ public class MobileAppFactoryImpl implements MobileAppFactory {
 		}
 
 		return layerListView;
+	}
+
+	@Override
+	public FeatureInfoSlideUpView getFeatureInfoSlideView() {
+		if (featureInfoSlideUpView == null) {
+			featureInfoSlideUpView = new FeatureInfoSlideUpViewImpl();
+		}
+
+		return featureInfoSlideUpView;
 	}
 
 }

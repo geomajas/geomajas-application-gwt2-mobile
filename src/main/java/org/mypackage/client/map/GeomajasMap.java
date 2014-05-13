@@ -22,6 +22,7 @@ import org.geomajas.geometry.Bbox;
 import org.geomajas.geometry.Coordinate;
 import org.geomajas.gwt2.client.GeomajasImpl;
 import org.geomajas.gwt2.client.GeomajasServerExtension;
+import org.geomajas.gwt2.client.controller.MapController;
 import org.geomajas.gwt2.client.event.MapInitializationEvent;
 import org.geomajas.gwt2.client.event.MapInitializationHandler;
 import org.geomajas.gwt2.client.map.MapConfiguration;
@@ -30,6 +31,7 @@ import org.geomajas.gwt2.client.map.MapPresenter;
 import org.geomajas.gwt2.client.map.layer.tile.TileConfiguration;
 import org.geomajas.gwt2.client.widget.DefaultMapWidget;
 import org.geomajas.gwt2.client.widget.MapLayoutPanel;
+import org.geomajas.hammergwt.client.handler.HammerTapHandler;
 import org.geomajas.plugin.tms.client.TmsClient;
 import org.geomajas.plugin.tms.client.configuration.TileMapInfo;
 import org.geomajas.plugin.tms.client.layer.TmsLayer;
@@ -64,18 +66,25 @@ public class GeomajasMap implements IsWidget {
 
 	private MapPresenter mapPresenter;
 
+	private final MapHammerController mapHammerController;
+
 	public GeomajasMap() {
 		layout = new MapLayoutPanel();
 
 		// Create the MapPresenter and add to the layout:
 		mapPresenter = GeomajasImpl.getInstance().createMapPresenter();
 
+
 		mapPresenter.setSize(100,100);
 		//mapPresenter = GeomajasImpl.getInstance().createMapPresenter(configuration, 480, 480);
 
 		mapPresenter.getEventBus().addMapInitializationHandler(new MyMapInitializationHandler());
-		mapPresenter.setMapController(new MapHammerController());
+
 		layout.setPresenter(mapPresenter);
+
+		mapHammerController = new MapHammerController();
+
+		mapPresenter.setMapController(mapHammerController);
 
 
 		// Initialize the map server side
@@ -84,6 +93,10 @@ public class GeomajasMap implements IsWidget {
 
 		initializeMap();
 
+	}
+
+	public void setMapTapHandler(MapHammerController.HammerTapLocationHandler tapHandler) {
+		mapHammerController.setTapHandler(tapHandler);
 	}
 
 	private void initializeMap() {
@@ -104,6 +117,10 @@ public class GeomajasMap implements IsWidget {
 
 		resizeLayoutPanel.setWidget(layout);
 		return resizeLayoutPanel;
+	}
+
+	public void setMapController() {
+
 	}
 
 

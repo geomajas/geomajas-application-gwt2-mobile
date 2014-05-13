@@ -11,9 +11,12 @@
 package org.mypackage.client;
 
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.web.bindery.event.shared.EventBus;
+import org.mypackage.client.map.MapHammerController;
 import org.mypackage.client.view.LegendView;
 import org.mypackage.client.view.MobileMapView;
+import org.mypackage.client.widget.feature.FeatureInfoSlideUpView;
 import org.mypackage.client.widget.layerlist.LayerListView;
 
 /**
@@ -26,8 +29,6 @@ import org.mypackage.client.widget.layerlist.LayerListView;
  * 
  */
 public interface MobileAppFactory {
-	public MobileMapView getHomeView();
-
 	public EventBus getEventBus();
 
 	public PlaceController getPlaceController();
@@ -40,5 +41,7 @@ public interface MobileAppFactory {
  	public LegendView getLegendView();
 
 	public LayerListView getlayerListView();
+
+	public FeatureInfoSlideUpView getFeatureInfoSlideView();
 
 }

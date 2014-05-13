@@ -10,6 +10,7 @@
  */
 package org.mypackage.client.map;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.GestureChangeEvent;
@@ -32,14 +33,22 @@ import org.geomajas.gwt2.client.controller.MapController;
 import org.geomajas.gwt2.client.map.MapPresenter;
 import org.geomajas.gwt2.client.map.View;
 import org.geomajas.gwt2.client.map.ViewPort;
+import org.geomajas.gwt2.client.map.feature.Feature;
+import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
+import org.geomajas.gwt2.widget.client.featureselectbox.event.FeatureClickedEvent;
 import org.geomajas.hammergwt.client.event.EventType;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.event.PointerType;
 import org.geomajas.hammergwt.client.handler.HammerHandler;
+import org.geomajas.hammergwt.client.handler.HammerTapHandler;
 import org.geomajas.hammergwt.client.impl.HammerGWT;
 import org.geomajas.hammergwt.client.impl.HammerTime;
+import org.geomajas.hammergwt.client.impl.option.GestureOption;
 import org.geomajas.hammergwt.client.impl.option.GestureOptions;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,16 +68,25 @@ public class MapHammerController implements MapController, HammerHandler {
 
 	private MapPresenter mapPresenter;
 
+	private HammerTapLocationHandler tapHandler;
 
+	private int pixelBuffer;
+
+
+	public MapHammerController() {
+		pixelBuffer = 7; //7px buffer
+	}
 
 	@Override
 	public void onActivate(MapPresenter presenter) {
 		mapPresenter = presenter;
 
 		HammerTime hammerTime = HammerGWT.on(presenter.asWidget(), this,
-				EventType.PINCH, EventType.TOUCH, EventType.DRAG, EventType.DRAGSTART);
+				EventType.PINCH, EventType.TOUCH, EventType.DRAG, EventType.DRAGSTART, EventType.TAP, EventType.HOLD);
 
 		hammerTime.setOption(GestureOptions.PREVENT_DEFAULT, true);
+
+		hammerTime.setOption(GestureOptions.HOLD_TIMEOUT, 2);
 	}
 
 	@Override
@@ -78,6 +96,10 @@ public class MapHammerController implements MapController, HammerHandler {
 		HammerGWT.off(presenter.asWidget(), EventType.TOUCH);
 		HammerGWT.off(presenter.asWidget(), EventType.DRAG);
 		HammerGWT.off(presenter.asWidget(), EventType.DRAGSTART);
+	}
+
+	public void  setTapHandler(HammerTapLocationHandler tapHandler) {
+		this.tapHandler = tapHandler;
 	}
 
 	@Override
@@ -173,6 +195,13 @@ public class MapHammerController implements MapController, HammerHandler {
 
 		switch (event.getType()) {
 
+			case TAP:
+				if (null != tapHandler) {
+					tapHandler.onLocationTap(event, getLocation(event,  RenderSpace.WORLD));
+				}
+
+				break;
+
 			case TOUCH:
 				currentResIndex =
 						mapPresenter.getViewPort().getResolutionIndex(mapPresenter.getViewPort().getResolution());
@@ -221,6 +250,10 @@ public class MapHammerController implements MapController, HammerHandler {
 
 			case DRAG:
 				updateView(event);
+				break;
+
+			case HOLD:
+				event.getDirection();
 				break;
 
 			default:
@@ -276,5 +309,9 @@ public class MapHammerController implements MapController, HammerHandler {
 		double dX = (rescalePoint.getX() - position.getX()) * (1 - 1 / factor);
 		double dY = (rescalePoint.getY() - position.getY()) * (1 - 1 / factor);
 		return new Coordinate(position.getX() + dX, position.getY() + dY);
+	}
+
+	public interface HammerTapLocationHandler {
+		void onLocationTap(NativeHammerEvent event, Coordinate tappedLocation);
 	}
 }

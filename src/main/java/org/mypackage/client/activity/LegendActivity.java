@@ -38,7 +38,7 @@ public class LegendActivity extends MGWTAbstractActivity implements LegendPresen
 		MapPresenter mapPresenter = mobileAppFactory.getMapView().getMap().getMapPresenter();
 
 		this.layerListPresenter =
-				new LayerListPresenterImpl(mapPresenter.getEventBus(), mobileAppFactory);
+				new LayerListPresenterImpl(mapPresenter.getEventBus(), mobileAppFactory.getlayerListView());
 		this.eventId = "nav";
 
 		layerListPresenter.renderLayerRecords(mapPresenter.getLayersModel());

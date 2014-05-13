@@ -1,5 +1,7 @@
 package org.mypackage.client.presenter;
 
+import org.mypackage.client.map.MapHammerController;
+
 /**
  * Mobile map presenter interface.
  *
