@@ -75,7 +75,7 @@ public class GeomajasMap implements IsWidget {
 		mapPresenter = GeomajasImpl.getInstance().createMapPresenter();
 
 
-		mapPresenter.setSize(100,100);
+		mapPresenter.setSize(300,300);
 		//mapPresenter = GeomajasImpl.getInstance().createMapPresenter(configuration, 480, 480);
 
 		mapPresenter.getEventBus().addMapInitializationHandler(new MyMapInitializationHandler());

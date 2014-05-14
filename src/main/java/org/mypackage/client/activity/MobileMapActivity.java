@@ -10,7 +10,10 @@
  */
 package org.mypackage.client.activity;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.web.bindery.event.shared.EventBus;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
@@ -60,7 +63,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 		this.mapView = mobileAppFactory.getMapView();
 		this.eventId = "nav";
 		this.mobileAppFactory = mobileAppFactory;
-		featureInfoSlideUpPresenter = new FeatureInfoSlideUpPresenterImpl();
+		featureInfoSlideUpPresenter = new FeatureInfoSlideUpPresenterImpl(mapView.getSlideUpContainer());
+
 	}
 
   @Override
@@ -75,10 +79,21 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 
 	}));
 
+
+	featureInfoSlideUpPresenter.setDragUpHandler(new FeatureInfoSlideUpPresenter.DragUpHandler() {
+
+		 @Override
+		 public void onDragUp() {
+			 //sfeatureInfoSlideUpPresenter.getView().hide();
+			 ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.LEGEND);
+		 }
+	 });
+
 	  mapView.getMap().setMapTapHandler(new MapHammerController.HammerTapLocationHandler() {
 
 			@Override
 			public void onLocationTap(NativeHammerEvent event, Coordinate tappedLocation) {
+				   //featureInfoSlideUpPresenter.getView().hide();
 					searchAtLocation(tappedLocation);
 				}
 			});

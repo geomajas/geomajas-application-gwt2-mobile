@@ -10,6 +10,7 @@
  */
 package org.mypackage.client.widget.zoom;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -34,13 +35,19 @@ public class MobileZoomViewImpl implements  MobileZoomView {
 
 	public MobileZoomViewImpl() {
 		zoomIn = new Button();
-		zoomIn.setSmall(true);
 		zoomOut = new Button();
 		zoomOut.setText("-");
-		zoomOut.setSmall(true);
 		zoomIn.setText("+");
+
+		//style buttons
 		zoomIn.getElement().getStyle().setOpacity(0.8);
 		zoomOut.getElement().getStyle().setOpacity(0.8);
+
+		zoomOut.getElement().getStyle().setFontSize(15, Style.Unit.PX);
+		zoomOut.getElement().getStyle().setProperty("padding", "5px 10px");
+
+		zoomIn.getElement().getStyle().setFontSize(15, Style.Unit.PX);
+		zoomIn.getElement().getStyle().setProperty("padding", "5px 10px");
 
 		control = new AbsolutePanel();
 		control.add(zoomIn);

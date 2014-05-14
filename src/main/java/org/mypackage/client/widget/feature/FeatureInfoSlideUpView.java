@@ -13,6 +13,7 @@ package org.mypackage.client.widget.feature;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
+import com.googlecode.mgwt.ui.client.dialog.SlideUpPanel;
 import org.mypackage.client.widget.layerlist.LayerListView;
 
 public interface FeatureInfoSlideUpView extends IsWidget {
@@ -21,4 +22,6 @@ public interface FeatureInfoSlideUpView extends IsWidget {
 	void hide();
 
 	void setText(String  text);
+
+	SlideUpPanel getPane();
 }

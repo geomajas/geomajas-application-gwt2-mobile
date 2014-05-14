@@ -14,10 +14,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
@@ -27,6 +24,7 @@ import com.googlecode.mgwt.dom.client.recognizer.longtap.LongTapRecognizer;
 import com.googlecode.mgwt.ui.client.dialog.SlideUpPanel;
 import com.googlecode.mgwt.ui.client.widget.Button;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
+import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
 import org.geomajas.geometry.Coordinate;
 import org.geomajas.geometry.Geometry;
 import org.geomajas.gwt.client.map.RenderSpace;
@@ -57,28 +55,44 @@ import java.util.Map;
  */
 public class MobileMapViewImpl implements MobileMapView {
 	protected Button legendButton;
-	protected HTML title;
 	protected GeomajasMap geomajasMap;
 	private MobileZoomView zoomControl;
 
+	private FlowPanel layoutPanel;
+
+	private FlowPanel slideUpContainer;
+
+
 	public MobileMapViewImpl() {
+		layoutPanel = new FlowPanel();
+		slideUpContainer = new FlowPanel();
+		layoutPanel.setSize("100%", "100%");
+		slideUpContainer.setSize("100%", "70px");
+		slideUpContainer.getElement().getStyle().setPosition(Style.Position.ABSOLUTE);
+		slideUpContainer.getElement().getStyle().setBottom(0, Style.Unit.PX);
+
 		geomajasMap = new GeomajasMap();
-		title = new HTML();
 		legendButton = new Button();
-		legendButton.setSmall(true);
 		legendButton.getElement().getStyle().setOpacity(0.6);
 		legendButton.getElement().getStyle().setRight(2, Style.Unit.PX);
+		legendButton.getElement().getStyle().setFontSize(15, Style.Unit.PX);
+		legendButton.getElement().getStyle().setProperty("padding", "5px 10px");
 		legendButton.getElement().getStyle().setTop(2, Style.Unit.PX);
 		zoomControl = new MobileZoomViewImpl();
 		zoomControl.asWidget().getElement().getStyle().setLeft(2, Style.Unit.PX);
 		zoomControl.asWidget().getElement().getStyle().setTop(2, Style.Unit.PX);
 		geomajasMap.getMapPresenter().getWidgetPane().add(zoomControl.asWidget());
 		geomajasMap.getMapPresenter().getWidgetPane().add(legendButton);
+
+		layoutPanel.add(geomajasMap.asWidget());
+		layoutPanel.add(slideUpContainer);
 	}
 
 	@Override
 	public Widget asWidget() {
-		return geomajasMap.asWidget();
+		//return geomajasMap.asWidget();
+
+		return layoutPanel;
 	}
 
 	@Override
@@ -99,6 +113,16 @@ public class MobileMapViewImpl implements MobileMapView {
 	@Override
 	public MobileZoomView getZoomControl() {
 		return zoomControl;
+	}
+
+	@Override
+	public FlowPanel getLayout() {
+		return layoutPanel;
+	}
+
+	@Override
+	public FlowPanel getSlideUpContainer() {
+		return slideUpContainer;
 	}
 
 }

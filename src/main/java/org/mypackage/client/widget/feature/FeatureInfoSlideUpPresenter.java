@@ -10,6 +10,8 @@
  */
 package org.mypackage.client.widget.feature;
 
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.geomajas.gwt2.client.map.feature.Feature;
 import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
@@ -25,4 +27,18 @@ public interface FeatureInfoSlideUpPresenter {
 	void setView(FeatureInfoSlideUpView view);
 
 	FeatureInfoSlideUpView getView();
+
+	void setDragUpHandler(DragUpHandler dragUpHandler);
+
+	void setDragDownHandler(DragDownHandler dragDownHandler);
+
+	public interface DragUpHandler {
+		void onDragUp();
+	}
+
+	public interface DragDownHandler {
+		void onDragDown();
+	}
+
 }
+

@@ -15,7 +15,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.googlecode.mgwt.ui.client.dialog.SlideUpPanel;
 
-public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView {
+public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView  {
 	private FlowPanel widget;
 	private Label label;
 
@@ -36,7 +36,7 @@ public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView {
 		widget.add(label);
 
 		int clientWidth = Window.getClientWidth();
-		widget.setSize(clientWidth + "px", "60px");
+		widget.setSize("100%", "60px");
 
 		panel.add(widget);
 	}
@@ -60,5 +60,10 @@ public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView {
 	@Override
 	public void setText(String text) {
 		label.setText(text);
+	}
+
+	@Override
+	public SlideUpPanel getPane() {
+		return panel;
 	}
 }

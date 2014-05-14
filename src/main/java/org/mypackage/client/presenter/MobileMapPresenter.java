@@ -1,5 +1,6 @@
 package org.mypackage.client.presenter;
 
+import com.google.gwt.user.client.ui.FlowPanel;
 import org.mypackage.client.map.MapHammerController;
 
 /**

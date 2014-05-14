@@ -10,6 +10,7 @@
  */
 package org.mypackage.client.view;
 
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
@@ -21,7 +22,7 @@ import org.mypackage.client.widget.zoom.MobileZoomView;
 /**
  * Mobile map view interface.
  */
-public interface MobileMapView extends IsWidget{
+public interface MobileMapView extends IsWidget {
 	public HasText getLegendButtonText();
 	
 	public HasTapHandlers getLegendButton();
@@ -29,4 +30,8 @@ public interface MobileMapView extends IsWidget{
 	public GeomajasMap getMap();
 
 	public MobileZoomView getZoomControl();
+
+	FlowPanel getLayout();
+
+	FlowPanel getSlideUpContainer();
 }

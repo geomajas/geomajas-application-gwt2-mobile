@@ -11,6 +11,9 @@
 package org.mypackage.client.widget.feature;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasWidgets;
 import org.geomajas.gwt2.client.map.feature.Feature;
 import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
 import org.geomajas.gwt2.widget.client.featureselectbox.event.FeatureClickedEvent;
@@ -24,13 +27,23 @@ import java.util.List;
 import java.util.Map;
 
 public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresenter {
+
 	private FeatureInfoSlideUpView view;
+
+	private DragUpHandler dragUpHandler;
+
+	private DragDownHandler dragDownHandler;
+
+	private FlowPanel slideUpContainer;
 
 	private int currentIndex;
 
 	private Map<String, org.geomajas.gwt2.client.map.feature.Feature> clickedFeatures;
 
-	public FeatureInfoSlideUpPresenterImpl() {
+	public FeatureInfoSlideUpPresenterImpl(FlowPanel slideUpContainer) {
+		this.slideUpContainer = slideUpContainer;
+		//slideUpContainer.getElement().getStyle().setDisplay(Style.Display.NONE);
+		slideUpContainer.getElement().getStyle().setHeight(0, Style.Unit.PX);
 		clickedFeatures = new HashMap<String, Feature>();
 		currentIndex = 0;
 	}
@@ -39,7 +52,8 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 	public boolean show() {
 		if (null != view) {
 			setFeatureLabelText();
-
+			//slideUpContainer.getElement().getStyle().setProperty("display", "");
+			slideUpContainer.getElement().getStyle().setHeight(70, Style.Unit.PX);
 			view.show();
 
 			return true;
@@ -50,8 +64,8 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 
 	private void setFeatureLabelText() {
 		Feature clickedFeuture = (Feature) clickedFeatures.values().toArray()[currentIndex];
-		view.setText(clickedFeuture.getLabel() + " ID="+clickedFeuture.getId()+
-				" (" + (currentIndex + 1) +"/" + clickedFeatures.size()  + ")");
+		view.setText(clickedFeuture.getLabel() + " ID=" + clickedFeuture.getId() +
+				" (" + (currentIndex + 1) + "/" + clickedFeatures.size() + ")");
 	}
 
 	@Override
@@ -73,8 +87,8 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 			}
 		}
 
-		if (clickedFeatures.size() > 0 ) {
-			currentIndex = clickedFeatures.size() - 1 ;
+		if (clickedFeatures.size() > 0) {
+			currentIndex = clickedFeatures.size() - 1;
 			show();
 		}
 
@@ -84,6 +98,9 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 	@Override
 	public void setView(final FeatureInfoSlideUpView view) {
 		this.view = view;
+		view.getPane().setPanelToOverlay(slideUpContainer);
+
+
 
 		HammerGWT.on(view.asWidget(), new HammerHandler() {
 
@@ -93,8 +110,21 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 				event.preventDefault();
 				event.preventNativeDefault();
 
+				if (event.getType() == EventType.DRAGUP) {
+					if ( null != dragUpHandler) {
+						dragUpHandler.onDragUp();
+					}
+
+					slideUpContainer.getElement().getStyle().setHeight(0, Style.Unit.PX);
+				}
+
 				if (event.getType() == EventType.DRAGDOWN) {
+					if ( null != dragDownHandler) {
+						dragDownHandler.onDragDown();
+					}
+
 					view.hide();
+					slideUpContainer.getElement().getStyle().setHeight(0, Style.Unit.PX);
 				}
 
 				if (clickedFeatures.size() > 0) {
@@ -117,14 +147,23 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 					}
 				}
 
-
 			}
-		}, EventType.DRAGDOWN , EventType.DRAGRIGHT, EventType.DRAGLEFT);
+		}, EventType.DRAGDOWN, EventType.DRAGRIGHT, EventType.DRAGLEFT, EventType.DRAGUP);
 	}
 
 	@Override
 	public FeatureInfoSlideUpView getView() {
 		return view;
+	}
+
+	@Override
+	public void setDragUpHandler(DragUpHandler dragUpHandler) {
+		this.dragUpHandler = dragUpHandler;
+	}
+
+	@Override
+	public void setDragDownHandler(DragDownHandler dragDownHandler) {
+		this.dragDownHandler = dragDownHandler;
 	}
 
 	/**
@@ -141,9 +180,11 @@ public class FeatureInfoSlideUpPresenterImpl implements FeatureInfoSlideUpPresen
 
 			//featureSelectBoxView.show(false);
 		} else if (clickedFeatures.size() == 1) {
-						Feature clickedFeuture = (Feature) clickedFeatures.values().toArray()[0];
+			Feature clickedFeuture = (Feature) clickedFeatures.values().toArray()[0];
 
 			//mapPresenter.getEventBus().fireEvent(new FeatureClickedEvent(clickedFeuture));
 		}
 	}
+
 }
+
