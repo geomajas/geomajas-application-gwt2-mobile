@@ -50,6 +50,10 @@ public interface FeatureInfoPresenter {
 		void onDragDown();
 	}
 
+	public interface FeatureNumberTabHandler {
+		void onFeatureNumberTap();
+	}
+
 
 	String getTitle();
 

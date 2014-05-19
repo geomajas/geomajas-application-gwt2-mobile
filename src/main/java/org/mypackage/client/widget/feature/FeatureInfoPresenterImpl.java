@@ -45,6 +45,8 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 
 	private int currentIndex;
 
+	private Element numberFeatures;
+
 	private List<Feature> featureList;
 
 	public FeatureInfoPresenterImpl(FeatureInfoSlideUpView view, FlowPanel slideUpContainer) {
@@ -52,6 +54,10 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 		this.slideUpContainer = slideUpContainer;
 		this.view.getPane().setPanelToOverlay(slideUpContainer);
 		//slideUpContainer.getElement().getStyle().setDisplay(Style.Display.NONE);
+		this.numberFeatures = DOM.createSpan();
+		this.numberFeatures.getStyle().setTextDecoration(Style.TextDecoration.OVERLINE);
+		this.numberFeatures.getStyle().setCursor(Style.Cursor.POINTER);
+
 		slideUpContainer.getElement().getStyle().setHeight(0, Style.Unit.PX);
 		featureList = new ArrayList<Feature>();
 
@@ -116,11 +122,11 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 		}
 
 
-		  this.view.getLeftButton().addClickHandler(new ClickHandler() {
+	this.view.getLeftButton().addClickHandler(new ClickHandler() {
 
 			  @Override
 			  public void onClick(ClickEvent event) {
-				  if (shiftToPrevFeature()) {
+				  if (shiftToNextFeature()) {
 					  setFeatureLabelText();
 				  }
 			  }
@@ -131,7 +137,7 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				if (shiftToNextFeature()) {
+				if (shiftToPrevFeature()) {
 					setFeatureLabelText();
 				}
 			}
@@ -246,6 +252,7 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 	public void setDragDownHandler(DragDownHandler dragDownHandler) {
 		this.dragDownHandler = dragDownHandler;
 	}
+
 /*
 	private Map.Entry getEntry(int id){
 		Iterator iterator = featureList.entrySet().iterator();

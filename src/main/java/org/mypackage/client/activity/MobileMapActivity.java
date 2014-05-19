@@ -103,6 +103,7 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 		 }
 	 });
 
+
 	  mapView.getMap().setMapTapHandler(new MapHammerController.HammerTapLocationHandler() {
 
 			@Override
@@ -245,7 +246,7 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 								Coordinate c2 = new Coordinate(c.getX() + buffer, c.getY() + buffer);
 								Geometry geometry = new Geometry(Geometry.LINE_STRING, 0, 0);
 								geometry.setCoordinates(new Coordinate[] { c1, c2 });*/
-								Bbox bbox = GeometryService.getBounds(geom);
+
 
 								//int co = mapView.getMap().getMapPresenter().getViewPort().getResolutionIndex(19);
 
@@ -255,16 +256,13 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 										minRes));
 */
 
+							   Bbox bbox = GeometryService.getBounds(geom);
+							   mapView.getMap().getMapPresenter().getViewPort().applyBounds(bbox);
+							   double resApply = mapView.getMap().getMapPresenter().getViewPort().getResolution(19);
+							   mapView.getMap().getMapPresenter().getViewPort().applyResolution(resApply);
 
-							   //mapView.getMap().getMapPresenter().getViewPort().applyBounds(bbox);
-
-
-								double resApply = mapView.getMap().getMapPresenter().getViewPort().getResolution(15);
-
-								//mapView.getMap().getMapPresenter().getViewPort().applyResolution(resApply);
-
-								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
-										resApply));
+							/*	mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
+										resApply));*/
 
 
 
