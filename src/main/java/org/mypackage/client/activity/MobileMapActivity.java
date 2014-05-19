@@ -11,7 +11,6 @@
 package org.mypackage.client.activity;
 
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.geolocation.client.Geolocation;
 import com.google.gwt.geolocation.client.Position;
@@ -34,8 +33,6 @@ import org.geomajas.gwt.client.command.CommandCallback;
 import org.geomajas.gwt.client.command.GwtCommand;
 import org.geomajas.gwt.client.command.GwtCommandDispatcher;
 import org.geomajas.gwt.client.map.RenderSpace;
-import org.geomajas.gwt2.client.Geomajas;
-import org.geomajas.gwt2.client.GeomajasImpl;
 import org.geomajas.gwt2.client.GeomajasServerExtension;
 import org.geomajas.gwt2.client.animation.NavigationAnimationFactory;
 import org.geomajas.gwt2.client.map.MapPresenter;
@@ -47,7 +44,6 @@ import org.geomajas.gwt2.client.map.feature.FeatureMapFunction;
 import org.geomajas.gwt2.client.map.feature.ServerFeatureService;
 import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
 import org.geomajas.gwt2.client.map.render.RenderMapEvent;
-import org.geomajas.gwt2.client.service.GeometryOperationServiceImpl;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.mypackage.client.MobileAppFactory;
 import org.mypackage.client.event.ViewChangeEvent;
@@ -202,7 +198,6 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 	}
 
 
-
 	private void getGeoLocation() {
 
 		final Geolocation geo = Geolocation.getIfSupported();
@@ -215,9 +210,7 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 					TransformGeometryRequest req = new TransformGeometryRequest();
 					Geometry point = new Geometry(Geometry.POINT, 4326, -1);
 					point.setCoordinates(new Coordinate[] { new Coordinate(coord.getLongitude(), coord.getLatitude()) });
-
-					GWT.log("Browser coords " + new Coordinate(coord.getLongitude(), coord.getLatitude()));
-
+					GWT.log("Browser geolocation coords " + new Coordinate(coord.getLongitude(), coord.getLatitude()));
 					req.setGeometry(point);
 
 					req.setSourceCrs("EPSG:4326");
@@ -234,22 +227,47 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 							if (response.getErrors().isEmpty()) {
 								org.geomajas.geometry.Geometry geom = ((TransformGeometryResponse) response)
 										.getGeometry();
+
+								GWT.log("Geomajas after transform coords " + geom.getCoordinates()[0]);
+/*
 								double accuracy = result.getCoordinates().getAccuracy();
-
-								GWT.log("After transform coords " + geom.getCoordinates()[0]);
-
 								Bbox box = new Bbox(geom.getCoordinates()[0].getX() - (accuracy / 2), geom
 										.getCoordinates()[0].getY() - (accuracy / 2), accuracy, accuracy);
 								double res = mapView.getMap().getMapPresenter().getViewPort().getResolution();
 
-
-								int co = mapView.getMap().getMapPresenter().getViewPort().getResolutionIndex(mapView.getMap().getMapPresenter().getViewPort().getResolution());
 								double crr = mapView.getMap().getMapPresenter().getViewPort().getResolution(co + 3);
-
-
 								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0], crr));
+*/
 
-								//mapView.getMap().getMapPresenter().getViewPort().applyBounds(box, ZoomOption.LEVEL_CLOSEST);
+								//Coordinate c = geom.getCoordinates()[0];
+
+							/*	Coordinate c1 = new Coordinate(c.getX(), c.getY());
+								Coordinate c2 = new Coordinate(c.getX() + buffer, c.getY() + buffer);
+								Geometry geometry = new Geometry(Geometry.LINE_STRING, 0, 0);
+								geometry.setCoordinates(new Coordinate[] { c1, c2 });*/
+								Bbox bbox = GeometryService.getBounds(geom);
+
+								//int co = mapView.getMap().getMapPresenter().getViewPort().getResolutionIndex(19);
+
+							/*	double minRes = mapView.getMap().getMapPresenter().getViewPort().getResolution(5);
+
+								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
+										minRes));
+*/
+
+
+							   //mapView.getMap().getMapPresenter().getViewPort().applyBounds(bbox);
+
+
+								double resApply = mapView.getMap().getMapPresenter().getViewPort().getResolution(15);
+
+								//mapView.getMap().getMapPresenter().getViewPort().applyResolution(resApply);
+
+								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
+										resApply));
+
+
+
 							}
 						}
 					});
@@ -263,8 +281,6 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 			});
 		}
 	}
-
-
 
 
 }

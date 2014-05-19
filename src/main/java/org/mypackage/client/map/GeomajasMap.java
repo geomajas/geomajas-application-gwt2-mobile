@@ -153,6 +153,8 @@ public class GeomajasMap implements IsWidget {
 					TmsLayer layer = TmsClient.getInstance().createLayer(result);
 					layer.getTileConfiguration().setLimitXYByTileLevel(true);
 					mapPresenter.getLayersModel().addLayer(layer);
+					//move layer immedeately down so openstreet map stays top layer
+					mapPresenter.getLayersModel().moveLayerDown(layer);
 					mapPresenter.getLayersModelRenderer().setAnimated(layer, false);
 				}
 

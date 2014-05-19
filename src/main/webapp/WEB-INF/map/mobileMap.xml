@@ -91,7 +91,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 		</property>
 		<property name="layers">
 			<list>
-                <ref bean="clientLayerOsm" />
 
 				<bean class="org.geomajas.configuration.client.ClientVectorLayerInfo" id="countries110mLayer">
 					<property name="serverLayerId" value="layerCountries110m" />
@@ -104,6 +103,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
                 <ref bean="clientLayerCountriesWithFlag" />
                 <ref bean="clientLayerCities" />
+
+                <ref bean="clientLayerOsm" />
             </list>
 		</property>
 	</bean>

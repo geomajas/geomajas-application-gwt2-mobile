@@ -45,7 +45,7 @@ public class FeatureInfoActivity extends MGWTAbstractActivity {
 
   @Override
   public void start(AcceptsOneWidget panel, final EventBus eventBus) {
-	  panel.setWidget(featureInfoView);
+
 
 	  addHandlerRegistration(featureInfoView.getBackButton().addTapHandler(new TapHandler() {
 
@@ -135,6 +135,8 @@ public class FeatureInfoActivity extends MGWTAbstractActivity {
 		  }
 
 	  }*/
+
+	  panel.setWidget(featureInfoView);
   }
 
 
