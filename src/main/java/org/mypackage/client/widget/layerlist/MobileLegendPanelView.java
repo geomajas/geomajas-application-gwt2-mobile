@@ -25,9 +25,9 @@ import org.geomajas.gwt2.widget.client.map.LayerLegendPanel;
 
 /**
  * Legend panel that shows the legend for an entire map. It uses the {@link org.geomajas.gwt2.widget.client.map.LayerLegendPanel} to render the legends for
- * individual layers. This widget will keep track of the layers in the map's
+ * individual layers. This com.googlecode.mgwt.ui.client.widget will keep track of the layers in the map's
  * {@link org.geomajas.gwt2.client.map.layer.LayersModel}. If a new layer is added or layer is removed from the map,
- * this widget will change the legend accordingly. Also if the order of layers change, this widget will change
+ * this com.googlecode.mgwt.ui.client.widget will change the legend accordingly. Also if the order of layers change, this com.googlecode.mgwt.ui.client.widget will change
  * accordingly.
  *
  * @author Pieter De Graef
@@ -45,7 +45,7 @@ public class MobileLegendPanelView implements IsWidget {
 	 * Create a legend that displays all layer legends of a map.
 	 *
 	 * @param mapPresenter
-	 *            The map to display a legend widget for.
+	 *            The map to display a legend com.googlecode.mgwt.ui.client.widget for.
 	 */
 	public MobileLegendPanelView(MapPresenter mapPresenter) {
 		this.mapPresenter = mapPresenter;

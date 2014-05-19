@@ -19,8 +19,10 @@ import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
 import java.util.List;
 import java.util.Map;
 
-public interface FeatureInfoSlideUpPresenter {
+public interface FeatureInfoPresenter {
 	boolean show();
+
+	void hideView();
 
 	void fetchData(Map<FeaturesSupported, List<Feature>> featureMap);
 
@@ -32,6 +34,14 @@ public interface FeatureInfoSlideUpPresenter {
 
 	void setDragDownHandler(DragDownHandler dragDownHandler);
 
+	Feature getCurrentFeature();
+
+	boolean shiftToPrevFeature();
+
+	boolean shiftToNextFeature();
+
+	List<Feature> getAllFeatures();
+
 	public interface DragUpHandler {
 		void onDragUp();
 	}
@@ -39,6 +49,10 @@ public interface FeatureInfoSlideUpPresenter {
 	public interface DragDownHandler {
 		void onDragDown();
 	}
+
+
+	String getTitle();
+
 
 }
 

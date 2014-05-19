@@ -13,6 +13,7 @@ package org.mypackage.client.animation.mapper;
 import com.google.gwt.place.shared.Place;
 import com.googlecode.mgwt.mvp.client.Animation;
 import com.googlecode.mgwt.mvp.client.AnimationMapper;
+import org.mypackage.client.place.FeatureInfoPlace;
 import org.mypackage.client.place.LegendPlace;
 import org.mypackage.client.place.MapPlace;
 
@@ -33,6 +34,13 @@ public class PhoneAnimationMapper implements AnimationMapper {
 			return Animation.FLIP_REVERSE;
 		}
 
+		if (oldPlace instanceof MapPlace && newPlace instanceof FeatureInfoPlace) {
+			return Animation.SLIDE_UP;
+		}
+
+		if (oldPlace instanceof FeatureInfoPlace && newPlace instanceof MapPlace) {
+			return Animation.SLIDE_UP_REVERSE;
+		}
 
 		return Animation.SLIDE;
 

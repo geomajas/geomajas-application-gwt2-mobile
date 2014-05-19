@@ -10,4 +10,6 @@ import org.mypackage.client.map.MapHammerController;
  */
 public interface MobileMapPresenter {
 	void refreshMap();
+
+
 }

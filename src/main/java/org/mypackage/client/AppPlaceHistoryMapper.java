@@ -12,8 +12,10 @@ package org.mypackage.client;
 
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
+import org.mypackage.client.place.FeatureInfoPlace;
 import org.mypackage.client.place.LegendPlace;
 import org.mypackage.client.place.MapPlace;
+import org.mypackage.client.view.tst.FormsPlace;
 
 /**
  * History mapper.
@@ -21,6 +23,7 @@ import org.mypackage.client.place.MapPlace;
  * @author Dosi Bingov
  * 
  */
-@WithTokenizers({ MapPlace.MapPlaceTokenizer.class, LegendPlace.Tokenizer.class })
+@WithTokenizers({ MapPlace.MapPlaceTokenizer.class, LegendPlace.Tokenizer.class, FeatureInfoPlace.Tokenizer.class,
+		FormsPlace.Tokenizer.class})
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

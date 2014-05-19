@@ -14,10 +14,14 @@ import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import org.mypackage.client.MobileAppFactory;
+import org.mypackage.client.activity.FeatureInfoActivity;
 import org.mypackage.client.activity.LegendActivity;
 import org.mypackage.client.activity.MobileMapActivity;
+import org.mypackage.client.place.FeatureInfoPlace;
 import org.mypackage.client.place.LegendPlace;
 import org.mypackage.client.place.MapPlace;
+import org.mypackage.client.view.tst.FormsActivity;
+import org.mypackage.client.view.tst.FormsPlace;
 
 /**
  * @author Dosi Bingov
@@ -39,6 +43,14 @@ public class PhoneActivityMapper implements ActivityMapper {
 
 		if (place instanceof LegendPlace) {
 			return new LegendActivity(mobileAppFactory);
+		}
+
+		if (place instanceof FeatureInfoPlace) {
+			return new FeatureInfoActivity(mobileAppFactory);
+		}
+
+		if (place instanceof FormsPlace) {
+			return new FormsActivity(mobileAppFactory);
 		}
 
 		return new MobileMapActivity(mobileAppFactory);

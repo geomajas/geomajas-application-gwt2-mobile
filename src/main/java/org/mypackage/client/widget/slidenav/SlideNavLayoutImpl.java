@@ -88,7 +88,7 @@ public class SlideNavLayoutImpl implements SlideNavLayout, IsWidget {
 	}
 
 	/**
-	 * UI binder interface this widget.
+	 * UI binder interface this com.googlecode.mgwt.ui.client.widget.
 	 *
 	 * @author Dosi Bingov
 	 */

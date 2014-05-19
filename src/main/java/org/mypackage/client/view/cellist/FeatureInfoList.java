@@ -24,19 +24,19 @@ import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
  * @author Dosi Bingov
  * 
  */
-public abstract class LayerCell<T> implements Cell<T> {
+public abstract class FeatureInfoList<T> implements Cell<T> {
 
   private static Template TEMPLATE = GWT.create(Template.class);
 
   private String styleName;
 
-  public LayerCell() {
+  public FeatureInfoList() {
     styleName = "";
   }
 
   public interface Template extends SafeHtmlTemplates {
-    @Template("{0}")
-    SafeHtml content(SafeHtml toggleBut);
+    @Template("<div>{0}</div>")
+    SafeHtml content(String recordString);
 
   }
 
@@ -45,16 +45,7 @@ public abstract class LayerCell<T> implements Cell<T> {
 	  final MCheckBox mCheckBox1 = new MCheckBox();
 	  // mCheckBox1.setText("again");
 	  mCheckBox1.setImportant(true);
-
-	SafeHtml togglebutton =  new SafeHtml() {
-
-		@Override
-		public String asString() {
-			return mCheckBox1.getElement().getString();
-		}
-	};
-
-    safeHtmlBuilder.append(TEMPLATE.content(togglebutton));
+      safeHtmlBuilder.append(TEMPLATE.content(getDisplayString(model)));
 
   }
 

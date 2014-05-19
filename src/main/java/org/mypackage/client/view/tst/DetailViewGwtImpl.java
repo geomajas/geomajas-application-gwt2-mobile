@@ -1,26 +1,17 @@
-/*
- * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
- *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
- *
- * The program is available in open source according to the GNU Affero
- * General Public License. All contributions in this program are covered
- * by the Geomajas Contributors License Agreement. For full licensing
- * details, see LICENSE.txt in the project root.
- */
-package org.mypackage.client.view;
+package org.mypackage.client.view.tst;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
+import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
 import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
 import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
 import com.googlecode.mgwt.ui.client.widget.ScrollPanel;
-import org.mypackage.client.widget.layerlist.LayerListView;
 
-public class LegendViewImpl implements LegendView {
+public abstract class DetailViewGwtImpl implements DetailView {
 
 	protected LayoutPanel main;
 	protected ScrollPanel scrollPanel;
@@ -29,7 +20,7 @@ public class LegendViewImpl implements LegendView {
 	protected HeaderButton headerMainButton;
 	protected HTML title;
 
-	public LegendViewImpl() {
+	public DetailViewGwtImpl() {
 		main = new LayoutPanel();
 
 		scrollPanel = new ScrollPanel();
@@ -39,14 +30,17 @@ public class LegendViewImpl implements LegendView {
 		headerPanel.setCenterWidget(title);
 		headerBackButton = new HeaderButton();
 		headerBackButton.setBackButton(true);
+		headerBackButton.setVisible(!MGWT.getOsDetection().isAndroid());
 
 		headerMainButton = new HeaderButton();
 		headerMainButton.setRoundButton(true);
-		headerPanel.setLeftWidget(headerBackButton);
 
-		//test button
-		/*headerMainButton.setText("Test");
-		headerPanel.setRightWidget(headerMainButton);*/
+		if (!MGWT.getOsDetection().isPhone()) {
+			headerPanel.setLeftWidget(headerMainButton);
+			headerMainButton.addStyleName(MGWTStyle.getTheme().getMGWTClientBundle().getUtilCss().portraitonly());
+		} else {
+			headerPanel.setLeftWidget(headerBackButton);
+		}
 
 		main.add(headerPanel);
 		main.add(scrollPanel);
@@ -73,13 +67,13 @@ public class LegendViewImpl implements LegendView {
 	}
 
 	@Override
-	public HasTapHandlers getTestButton() {
+	public HasText getMainButtonText() {
 		return headerMainButton;
 	}
 
 	@Override
-	public void setLayerListView(LayerListView layerListView) {
-		scrollPanel.setWidget(layerListView);
+	public HasTapHandlers getMainButton() {
+		return headerMainButton;
 	}
 
 }

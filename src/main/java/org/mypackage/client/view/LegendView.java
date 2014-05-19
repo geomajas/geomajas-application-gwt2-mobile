@@ -26,13 +26,7 @@ public interface LegendView extends IsWidget{
 	
 	public HasTapHandlers getBackbutton();
 
-/*
-	public void renderRecords(List<LayerCellRecord> records);
-
-	public void setSelectedIndex(int index, boolean selected);
-
-	public HasCellSelectedHandler getList();
-*/
+	public HasTapHandlers getTestButton();
 
 	public void setLayerListView(LayerListView layerListView);
 

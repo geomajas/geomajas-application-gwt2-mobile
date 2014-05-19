@@ -12,6 +12,7 @@ import org.geomajas.gwt2.client.map.MapPresenter;
 import org.mypackage.client.MobileAppFactory;
 import org.mypackage.client.animation.ActionNames;
 import org.mypackage.client.event.ActionEvent;
+import org.mypackage.client.event.ViewChangeEvent;
 import org.mypackage.client.presenter.LegendPresenter;
 import org.mypackage.client.view.cellist.LayerCellRecord;
 import org.mypackage.client.view.LegendView;
@@ -57,11 +58,21 @@ public class LegendActivity extends MGWTAbstractActivity implements LegendPresen
       }
     }));
 
+	/*  addHandlerRegistration(legendView.getTestButton().addTapHandler(new TapHandler() {
+
+		  @Override
+		  public void onTap(TapEvent event) {
+			  ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.TEST_VIEW);
+			  // eventBus.fireEvent(new ShowMasterEvent(eventId));
+
+		 }
+	  }));*/
+
 	  /*records = getLegendRecords();
 	  legendView.renderRecords(records);*/
 /*
 
-	  addHandlerRegistration(legendView.getList().addCellSelectedHandler(new CellSelectedHandler() {
+	  addHandlerRegistration(legendView.getRecordsList().addCellSelectedHandler(new CellSelectedHandler() {
 
 		  @Override
 		  public void onCellSelected(CellSelectedEvent event) {

@@ -90,6 +90,8 @@ public class MobileEntryPoint implements EntryPoint {
 
 		RootLayoutPanel.get().add(display);
 
+
+
 	}
 
 

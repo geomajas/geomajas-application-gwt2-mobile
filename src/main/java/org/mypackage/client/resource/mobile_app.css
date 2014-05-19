@@ -1,0 +1,23 @@
+.buttonFeatureInfo {
+    overflow: auto;
+    height: auto;
+    font-size: 25px;
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 15px;
+}
+
+
+@sprite .splitImage {
+    gwt-image: 'split';
+    background-position: 50% top;
+    background-repeat: no-repeat;
+    cursor: all-scroll;
+}
+
+.slideUpcenter {
+    font-size: 18px;
+    line-height: 20px;
+    padding-top: 10px;
+}

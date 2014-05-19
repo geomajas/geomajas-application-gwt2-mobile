@@ -22,8 +22,10 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import org.mypackage.client.animation.ActionNames;
 import org.mypackage.client.event.ActionEvent;
 import org.mypackage.client.event.ViewChangeEvent;
+import org.mypackage.client.place.FeatureInfoPlace;
 import org.mypackage.client.place.LegendPlace;
 import org.mypackage.client.place.MapPlace;
+import org.mypackage.client.view.tst.FormsPlace;
 
 /**
  * History observer fot this mobile app.
@@ -62,10 +64,17 @@ public class AppHistoryObserver implements HistoryObserver {
 						switch (view) {
 							case LEGEND:
 								place = new LegendPlace();
-
 								break;
-							case MOBILE_MAP:
 
+							case FEATURE_INFO:
+								place = new FeatureInfoPlace();
+								break;
+
+							case TEST_VIEW:
+								place = new FormsPlace();
+								break;
+
+							case MOBILE_MAP:
 							default:
 								place = new MapPlace();
 								break;

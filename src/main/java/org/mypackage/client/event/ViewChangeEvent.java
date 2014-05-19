@@ -13,7 +13,7 @@ public class ViewChangeEvent extends Event<ViewChangeEvent.Handler> {
 	private VIEW view;
 
 	public enum VIEW {
-		MOBILE_MAP, LEGEND
+		MOBILE_MAP, LEGEND, FEATURE_INFO, TEST_VIEW
 	}
 
 	public interface Handler {

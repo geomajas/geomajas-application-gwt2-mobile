@@ -8,11 +8,22 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
+
 package org.mypackage.client.resource;
 
-import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 
-public interface ApplicationResource extends ClientBundle {
+/**
+ * CSS resource bundle for slide nav layout.
+ *
+ * @author Dosi Bingov
+ */
+public interface MobileAppCss extends CssResource {
 
+	@ClassName("buttonFeatureInfo")
+	String featureInfoButton();
 
+	String splitImage();
+
+	String slideUpcenter();
 }

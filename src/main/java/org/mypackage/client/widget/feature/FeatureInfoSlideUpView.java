@@ -10,6 +10,8 @@
  */
 package org.mypackage.client.widget.feature;
 
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
@@ -21,7 +23,11 @@ public interface FeatureInfoSlideUpView extends IsWidget {
 
 	void hide();
 
-	void setText(String  text);
+	void setLabel(String label);
 
 	SlideUpPanel getPane();
+
+	ButtonBase getLeftButton();
+
+	ButtonBase getRightButton();
 }

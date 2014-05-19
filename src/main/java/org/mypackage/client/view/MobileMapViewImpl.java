@@ -40,6 +40,7 @@ import org.geomajas.hammergwt.client.handler.HammerHandler;
 import org.geomajas.hammergwt.client.impl.HammerGWT;
 import org.mypackage.client.map.GeomajasMap;
 import org.mypackage.client.map.MapHammerController;
+import org.mypackage.client.resource.MobileAppResource;
 import org.mypackage.client.widget.feature.FeatureInfoSlideUpView;
 import org.mypackage.client.widget.zoom.MobileZoomView;
 import org.mypackage.client.widget.zoom.MobileZoomViewImpl;
@@ -55,6 +56,7 @@ import java.util.Map;
  */
 public class MobileMapViewImpl implements MobileMapView {
 	protected Button legendButton;
+	private Button gotoCurLocation;
 	protected GeomajasMap geomajasMap;
 	private MobileZoomView zoomControl;
 
@@ -70,10 +72,15 @@ public class MobileMapViewImpl implements MobileMapView {
 		slideUpContainer.setSize("100%", "70px");
 		slideUpContainer.getElement().getStyle().setPosition(Style.Position.ABSOLUTE);
 		slideUpContainer.getElement().getStyle().setBottom(0, Style.Unit.PX);
+		gotoCurLocation = new Button();
+		Image location = new Image(MobileAppResource.RESOURCE.location());
+		location.setHeight("30px");
+		location.setWidth("30px");
+		gotoCurLocation.getElement().appendChild(location.getElement());
 
 		geomajasMap = new GeomajasMap();
 		legendButton = new Button();
-		legendButton.getElement().getStyle().setOpacity(0.6);
+		legendButton.getElement().getStyle().setOpacity(0.8);
 		legendButton.getElement().getStyle().setRight(2, Style.Unit.PX);
 		legendButton.getElement().getStyle().setFontSize(15, Style.Unit.PX);
 		legendButton.getElement().getStyle().setProperty("padding", "5px 10px");
@@ -81,8 +88,18 @@ public class MobileMapViewImpl implements MobileMapView {
 		zoomControl = new MobileZoomViewImpl();
 		zoomControl.asWidget().getElement().getStyle().setLeft(2, Style.Unit.PX);
 		zoomControl.asWidget().getElement().getStyle().setTop(2, Style.Unit.PX);
+
+		gotoCurLocation.getElement().getStyle().setLeft(2, Style.Unit.PX);
+		gotoCurLocation.asWidget().getElement().getStyle().setTop(90, Style.Unit.PX);
+		gotoCurLocation.getElement().getStyle().setOpacity(0.8);
+		gotoCurLocation.getElement().getStyle().setPadding(0, Style.Unit.PX);
+		gotoCurLocation.getElement().getStyle().setHeight(30, Style.Unit.PX);
+		gotoCurLocation.getElement().getStyle().setWidth(30, Style.Unit.PX);
+
 		geomajasMap.getMapPresenter().getWidgetPane().add(zoomControl.asWidget());
 		geomajasMap.getMapPresenter().getWidgetPane().add(legendButton);
+		geomajasMap.getMapPresenter().getWidgetPane().add(gotoCurLocation);
+
 
 		layoutPanel.add(geomajasMap.asWidget());
 		layoutPanel.add(slideUpContainer);
@@ -106,6 +123,11 @@ public class MobileMapViewImpl implements MobileMapView {
 	}
 
 	@Override
+	public HasTapHandlers getLocationButton() {
+		return gotoCurLocation;
+	}
+
+	@Override
 	public GeomajasMap getMap() {
 		return geomajasMap;
 	}
@@ -115,10 +137,7 @@ public class MobileMapViewImpl implements MobileMapView {
 		return zoomControl;
 	}
 
-	@Override
-	public FlowPanel getLayout() {
-		return layoutPanel;
-	}
+
 
 	@Override
 	public FlowPanel getSlideUpContainer() {

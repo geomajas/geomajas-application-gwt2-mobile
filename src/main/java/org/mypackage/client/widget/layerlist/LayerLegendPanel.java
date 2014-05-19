@@ -34,12 +34,12 @@ import org.geomajas.gwt2.widget.client.map.WidgetMapResources;
 
 /**
  * <p>
- * A widget that displays the legend for a single layer. It provides the possibility to toggle that layer's visibility
+ * A com.googlecode.mgwt.ui.client.widget that displays the legend for a single layer. It provides the possibility to toggle that layer's visibility
  * through a CheckBox.
  * </p>
  * <p>
  * If the layer should become invisible because the map has zoomed in or out beyond the allowed scale range (for that
- * layer), the CheckBox in this widget will automatically become disabled. It is no use to start marking a layer visible
+ * layer), the CheckBox in this com.googlecode.mgwt.ui.client.widget will automatically become disabled. It is no use to start marking a layer visible
  * when it won't appear anyway.
  * </p>
  * 
@@ -50,7 +50,7 @@ import org.geomajas.gwt2.widget.client.map.WidgetMapResources;
 public class LayerLegendPanel extends Composite {
 
 	/**
-	 * UI binder definition for the {@link org.mypackage.client.widget.layerlist.LayerLegendPanel} widget.
+	 * UI binder definition for the {@link org.mypackage.client.widget.layerlist.LayerLegendPanel} com.googlecode.mgwt.ui.client.widget.
 	 * 
 	 * @author Pieter De Graef
 	 */
@@ -76,7 +76,7 @@ public class LayerLegendPanel extends Composite {
 	 * @param eventBus
 	 *            Map event bus. Must be the bus from the same map that holds the layer.
 	 * @param layer
-	 *            The layer to display in this legend widget.
+	 *            The layer to display in this legend com.googlecode.mgwt.ui.client.widget.
 	 */
 	public LayerLegendPanel(MapEventBus eventBus, final Layer layer) {
 		WidgetMapResources.INSTANCE.css().ensureInjected();

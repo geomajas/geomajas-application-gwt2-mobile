@@ -10,41 +10,51 @@
  */
 package org.mypackage.client.activity;
 
-import com.google.gwt.dom.client.Style;
+import com.google.gwt.core.client.Callback;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position;
+import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.web.bindery.event.shared.EventBus;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import com.googlecode.mgwt.mvp.client.MGWTAnimationEndEvent;
 import com.googlecode.mgwt.mvp.client.MGWTAnimationEndHandler;
-import com.googlecode.mgwt.ui.client.event.ShowMasterEvent;
+import org.geomajas.command.CommandResponse;
+import org.geomajas.command.dto.TransformGeometryRequest;
+import org.geomajas.command.dto.TransformGeometryResponse;
+import org.geomajas.geometry.Bbox;
 import org.geomajas.geometry.Coordinate;
 import org.geomajas.geometry.Geometry;
+import org.geomajas.geometry.service.GeometryService;
+import org.geomajas.gwt.client.command.CommandCallback;
+import org.geomajas.gwt.client.command.GwtCommand;
+import org.geomajas.gwt.client.command.GwtCommandDispatcher;
 import org.geomajas.gwt.client.map.RenderSpace;
+import org.geomajas.gwt2.client.Geomajas;
+import org.geomajas.gwt2.client.GeomajasImpl;
 import org.geomajas.gwt2.client.GeomajasServerExtension;
 import org.geomajas.gwt2.client.animation.NavigationAnimationFactory;
 import org.geomajas.gwt2.client.map.MapPresenter;
+import org.geomajas.gwt2.client.map.View;
 import org.geomajas.gwt2.client.map.ViewPort;
+import org.geomajas.gwt2.client.map.ZoomOption;
 import org.geomajas.gwt2.client.map.feature.Feature;
 import org.geomajas.gwt2.client.map.feature.FeatureMapFunction;
 import org.geomajas.gwt2.client.map.feature.ServerFeatureService;
 import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
 import org.geomajas.gwt2.client.map.render.RenderMapEvent;
+import org.geomajas.gwt2.client.service.GeometryOperationServiceImpl;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
-import org.geomajas.hammergwt.client.handler.HammerTapHandler;
 import org.mypackage.client.MobileAppFactory;
-import org.mypackage.client.event.ActionEvent;
-import org.mypackage.client.animation.ActionNames;
 import org.mypackage.client.event.ViewChangeEvent;
 import org.mypackage.client.map.MapHammerController;
 import org.mypackage.client.presenter.MobileMapPresenter;
 import org.mypackage.client.view.MobileMapView;
-import org.mypackage.client.widget.feature.FeatureInfoSlideUpPresenter;
-import org.mypackage.client.widget.feature.FeatureInfoSlideUpPresenterImpl;
-import org.mypackage.client.widget.feature.FeatureInfoSlideUpView;
+import org.mypackage.client.widget.feature.FeatureInfoPresenter;
 
 import java.util.List;
 import java.util.Map;
@@ -56,14 +66,14 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 
   private final MobileMapView mapView;
   private final String eventId;
-  private FeatureInfoSlideUpPresenter featureInfoSlideUpPresenter;
+  private FeatureInfoPresenter featureInfoSlideUpPresenter;
    private MobileAppFactory mobileAppFactory;
 
 	public MobileMapActivity(MobileAppFactory mobileAppFactory) {
 		this.mapView = mobileAppFactory.getMapView();
 		this.eventId = "nav";
 		this.mobileAppFactory = mobileAppFactory;
-		featureInfoSlideUpPresenter = new FeatureInfoSlideUpPresenterImpl(mapView.getSlideUpContainer());
+		featureInfoSlideUpPresenter = mobileAppFactory.getFeaturePresenter();
 
 	}
 
@@ -79,13 +89,21 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 
 	}));
 
+	  addHandlerRegistration(mapView.getLocationButton().addTapHandler(new TapHandler() {
 
-	featureInfoSlideUpPresenter.setDragUpHandler(new FeatureInfoSlideUpPresenter.DragUpHandler() {
+		  @Override
+		  public void onTap(TapEvent event) {
+			 	getGeoLocation();
+		  }
+
+	  }));
+
+
+	featureInfoSlideUpPresenter.setDragUpHandler(new FeatureInfoPresenter.DragUpHandler() {
 
 		 @Override
 		 public void onDragUp() {
-			 //sfeatureInfoSlideUpPresenter.getView().hide();
-			 ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.LEGEND);
+			 ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.FEATURE_INFO);
 		 }
 	 });
 
@@ -153,12 +171,9 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 					@Override
 					public void execute(Map<FeaturesSupported, List<Feature>> featureMap) {
 
-						if (null == featureInfoSlideUpPresenter.getView()) {
+						/*if (null == featureInfoSlideUpPresenter.getView()) {
 							featureInfoSlideUpPresenter.setView(mobileAppFactory.getFeatureInfoSlideView());
-						}
-
-
-						//featureInfoSlideUpPresenter.show();
+						}*/
 
 						featureInfoSlideUpPresenter.fetchData(featureMap);
 
@@ -185,5 +200,71 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 			refreshMap();
 		}
 	}
+
+
+
+	private void getGeoLocation() {
+
+		final Geolocation geo = Geolocation.getIfSupported();
+		if (geo != null) {
+			geo.getCurrentPosition(new Callback<Position, PositionError>() {
+
+				@Override
+				public void onSuccess(final Position result) {
+					Position.Coordinates coord = result.getCoordinates();
+					TransformGeometryRequest req = new TransformGeometryRequest();
+					Geometry point = new Geometry(Geometry.POINT, 4326, -1);
+					point.setCoordinates(new Coordinate[] { new Coordinate(coord.getLongitude(), coord.getLatitude()) });
+
+					GWT.log("Browser coords " + new Coordinate(coord.getLongitude(), coord.getLatitude()));
+
+					req.setGeometry(point);
+
+					req.setSourceCrs("EPSG:4326");
+
+					req.setTargetCrs(mapView.getMap().getMapPresenter().getViewPort().getCrs());
+
+					GwtCommand command = new GwtCommand(TransformGeometryRequest.COMMAND);
+					command.setCommandRequest(req);
+
+					GwtCommandDispatcher.getInstance().execute(command, new CommandCallback<CommandResponse>() {
+
+						@Override
+						public void execute(CommandResponse response) {
+							if (response.getErrors().isEmpty()) {
+								org.geomajas.geometry.Geometry geom = ((TransformGeometryResponse) response)
+										.getGeometry();
+								double accuracy = result.getCoordinates().getAccuracy();
+
+								GWT.log("After transform coords " + geom.getCoordinates()[0]);
+
+								Bbox box = new Bbox(geom.getCoordinates()[0].getX() - (accuracy / 2), geom
+										.getCoordinates()[0].getY() - (accuracy / 2), accuracy, accuracy);
+								double res = mapView.getMap().getMapPresenter().getViewPort().getResolution();
+
+
+								int co = mapView.getMap().getMapPresenter().getViewPort().getResolutionIndex(mapView.getMap().getMapPresenter().getViewPort().getResolution());
+								double crr = mapView.getMap().getMapPresenter().getViewPort().getResolution(co + 3);
+
+
+								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0], crr));
+
+								//mapView.getMap().getMapPresenter().getViewPort().applyBounds(box, ZoomOption.LEVEL_CLOSEST);
+							}
+						}
+					});
+
+				}
+
+				@Override
+				public void onFailure(PositionError reason) {
+
+				}
+			});
+		}
+	}
+
+
+
 
 }

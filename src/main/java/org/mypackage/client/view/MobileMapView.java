@@ -27,11 +27,11 @@ public interface MobileMapView extends IsWidget {
 	
 	public HasTapHandlers getLegendButton();
 
+	public HasTapHandlers getLocationButton();
+
 	public GeomajasMap getMap();
 
 	public MobileZoomView getZoomControl();
-
-	FlowPanel getLayout();
 
 	FlowPanel getSlideUpContainer();
 }

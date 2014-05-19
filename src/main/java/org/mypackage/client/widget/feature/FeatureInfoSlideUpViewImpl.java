@@ -10,32 +10,59 @@
  */
 package org.mypackage.client.widget.feature;
 
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 import com.googlecode.mgwt.ui.client.dialog.SlideUpPanel;
+import com.googlecode.mgwt.ui.client.widget.*;
+import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
+import org.mypackage.client.resource.MobileAppResource;
 
 public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView  {
-	private FlowPanel widget;
-	private Label label;
+	private com.googlecode.mgwt.ui.client.widget.HeaderPanel widget;
+	private FlowPanel label;
+	private FeatureInfoButton goLeft;
+	private  FeatureInfoButton goRight;
 
 	private SlideUpPanel panel;
 
 	public FeatureInfoSlideUpViewImpl() {
+		MobileAppResource.RESOURCE.css().ensureInjected();
 		panel = new SlideUpPanel();
 		panel.setShadow(false);
+		goLeft = new FeatureInfoButton();
+		goRight = new FeatureInfoButton();
+
+		goRight.setText(">");
+		goLeft.setText("<");
+
+		goRight.setStyleName(MobileAppResource.RESOURCE.css().featureInfoButton());
+		goLeft.setStyleName(MobileAppResource.RESOURCE.css().featureInfoButton());
 		//panel.setHideOnBackgroundClick(true);
 		//panel.setPanelToOverlay(haswidgets);
-		label = new Label();
-		widget = new FlowPanel();
+		label = new FlowPanel();
+		widget = new HeaderPanel();
 		panel.setCenterContent(true);
 		widget.getElement().getStyle().setPosition(Style.Position.ABSOLUTE);
 		widget.getElement().getStyle().setBottom(0, Style.Unit.PX); //align to bottom
 		widget.getElement().getStyle().setBackgroundColor("gray");
+		widget.setCenterWidget(label);
+		label.setHeight("60px");
 
-		widget.add(label);
+		label.getElement().getStyle().setFontSize(18, Style.Unit.PX);
+		label.addStyleName(MobileAppResource.RESOURCE.css().slideUpcenter());
+		label.addStyleName(MobileAppResource.RESOURCE.css().splitImage());
 
-		int clientWidth = Window.getClientWidth();
+		widget.setLeftWidget(goLeft);
+		widget.setRightWidget(goRight);
+
+		widget.getElement().getStyle().setCursor(Style.Cursor.MOVE);
+
 		widget.setSize("100%", "60px");
 
 		panel.add(widget);
@@ -48,7 +75,6 @@ public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView  {
 
 	@Override
 	public void show() {
-	//	panel.hide();
 		panel.show();
 	}
 
@@ -58,12 +84,32 @@ public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView  {
 	}
 
 	@Override
-	public void setText(String text) {
-		label.setText(text);
+	public void setLabel(String label) {
+		this.label.getElement().setInnerHTML(label);
 	}
 
 	@Override
 	public SlideUpPanel getPane() {
 		return panel;
+	}
+
+	@Override
+	public ButtonBase getLeftButton() {
+		return goLeft;
+	}
+
+	@Override
+	public ButtonBase getRightButton() {
+		return goRight;
+	}
+
+	class FeatureInfoButton extends ButtonBase {
+		public FeatureInfoButton() {
+			super(Document.get().createPushButtonElement());
+			getElement().getStyle().setProperty("top", "15px");
+			getElement().getStyle().setWidth(25, Style.Unit.PX);
+
+
+		}
 	}
 }
