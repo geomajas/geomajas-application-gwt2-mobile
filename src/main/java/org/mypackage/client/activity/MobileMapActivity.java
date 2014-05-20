@@ -258,8 +258,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 
 							   Bbox bbox = GeometryService.getBounds(geom);
 							   mapView.getMap().getMapPresenter().getViewPort().applyBounds(bbox);
-							   double resApply = mapView.getMap().getMapPresenter().getViewPort().getResolution(19);
-							   mapView.getMap().getMapPresenter().getViewPort().applyResolution(resApply);
+							/*   double resApply = mapView.getMap().getMapPresenter().getViewPort().getResolution(19);
+							   mapView.getMap().getMapPresenter().getViewPort().applyResolution(resApply);*/
 
 							/*	mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
 										resApply));*/

@@ -48,6 +48,8 @@ import org.geomajas.hammergwt.client.event.EventType;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.handler.HammerHandler;
 import org.geomajas.hammergwt.client.impl.HammerGWT;
+import org.geomajas.hammergwt.client.impl.HammerTime;
+import org.geomajas.hammergwt.client.impl.option.GestureOptions;
 import org.mypackage.client.widget.TouchBoard;
 import org.mypackage.client.widget.layerlist.LayerListView;
 
@@ -92,7 +94,7 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 		recordsList.setRound(true);
 		content = new ScrollPanel();
 
-		HammerGWT.on(content, new HammerHandler() {
+		HammerTime hammerTime = HammerGWT.on(content, new HammerHandler() {
 
 			@Override
 			public void onHammerEvent(NativeHammerEvent event) {
@@ -100,9 +102,6 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 				event.preventDefault();
 				event.preventNativeDefault();
 				event.stopPropagation();
-
-
-
 
 				if (event.getType() == EventType.DRAGRIGHT) {
 					if (null != dragRightHandler) {
@@ -117,10 +116,10 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 					}
 				}
 
-
-
 			}
 		}, EventType.DRAGRIGHT, EventType.DRAGLEFT);
+
+		hammerTime.setOption(GestureOptions.DRAG_MIN_DISTANCE, 10);
 
 
 		HammerGWT.on(headerPanel.asWidget(), new HammerHandler() {
