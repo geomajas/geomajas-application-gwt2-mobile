@@ -21,6 +21,12 @@
 	<description>Geomajas GWT2 mobile quickstart application</description>
 	<url>http://www.geomajas.org/</url>
 
+	<scm>
+		<connection>scm:git:git@github.com:geomajas/geomajas-gwt2-mobile-quickstart-application.git</connection>
+		<developerConnection>scm:git:git@github.com:geomajas/geomajas-gwt2-mobile-quickstart-application.git</developerConnection>
+		<url>https://github.com/geomajas/geomajas-gwt2-mobile-quickstart-application.git</url>
+	</scm>
+	
 	<licenses>
 		<license>
 			<name>GNU Affero General Public License, Version 3</name>
