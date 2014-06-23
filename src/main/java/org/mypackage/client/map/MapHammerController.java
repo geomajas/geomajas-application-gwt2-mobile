@@ -35,7 +35,6 @@ import org.geomajas.gwt2.client.map.View;
 import org.geomajas.gwt2.client.map.ViewPort;
 import org.geomajas.gwt2.client.map.feature.Feature;
 import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
-import org.geomajas.gwt2.widget.client.featureselectbox.event.FeatureClickedEvent;
 import org.geomajas.hammergwt.client.event.EventType;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.event.PointerType;
@@ -81,7 +80,9 @@ public class MapHammerController implements MapController, HammerHandler {
 	public void onActivate(MapPresenter presenter) {
 		mapPresenter = presenter;
 
-		HammerTime hammerTime = HammerGWT.on(presenter.asWidget(), this,
+		HammerTime hammerTime = HammerGWT.createInstance(presenter.asWidget());
+
+		HammerGWT.on(hammerTime, this,
 				EventType.PINCH, EventType.TOUCH, EventType.DRAG, EventType.DRAGSTART, EventType.TAP, EventType.HOLD);
 
 		hammerTime.setOption(GestureOptions.PREVENT_DEFAULT, true);
@@ -92,10 +93,7 @@ public class MapHammerController implements MapController, HammerHandler {
 	@Override
 	public void onDeactivate(MapPresenter presenter) {
 		//TODO remove hammer events
-		HammerGWT.off(presenter.asWidget(), EventType.PINCH);
-		HammerGWT.off(presenter.asWidget(), EventType.TOUCH);
-		HammerGWT.off(presenter.asWidget(), EventType.DRAG);
-		HammerGWT.off(presenter.asWidget(), EventType.DRAGSTART);
+
 	}
 
 	public void  setTapHandler(HammerTapLocationHandler tapHandler) {

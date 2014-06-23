@@ -28,7 +28,6 @@ import org.geomajas.gwt2.client.event.MapInitializationHandler;
 import org.geomajas.gwt2.client.map.MapConfiguration;
 import org.geomajas.gwt2.client.map.MapConfigurationImpl;
 import org.geomajas.gwt2.client.map.MapPresenter;
-import org.geomajas.gwt2.client.map.layer.tile.TileConfiguration;
 import org.geomajas.gwt2.client.widget.DefaultMapWidget;
 import org.geomajas.gwt2.client.widget.MapLayoutPanel;
 import org.geomajas.hammergwt.client.handler.HammerTapHandler;
@@ -146,16 +145,16 @@ public class GeomajasMap implements IsWidget {
 //			final TmsLayer tmsLayer = TmsClient.getInstance().createLayer("Countries", tileConfig, layerConfig);
 //			mapPresenter.getLayersModel().addLayer(tmsLayer);
 
-			TmsClient.getInstance().getTileMap("d/proxy?url=" + TMS_BASE_URL, new Callback<TileMapInfo, String>() {
+			/*TmsClient.getInstance().getTileMap("d/proxy?url=" + TMS_BASE_URL, new Callback<TileMapInfo, String>() {
 
 				@Override
 				public void onSuccess(TileMapInfo result) {
-					TmsLayer layer = TmsClient.getInstance().createLayer(result);
+					*//*TmsLayer layer = TmsClient.getInstance().createLayer(result);
 					layer.getTileConfiguration().setLimitXYByTileLevel(true);
 					mapPresenter.getLayersModel().addLayer(layer);
 					//move layer immedeately down so openstreet map stays top layer
 					mapPresenter.getLayersModel().moveLayerDown(layer);
-					mapPresenter.getLayersModelRenderer().setAnimated(layer, false);
+					mapPresenter.getLayersModelRenderer().setAnimated(layer, false);*//*
 				}
 
 				@Override
@@ -163,7 +162,7 @@ public class GeomajasMap implements IsWidget {
 					Window.alert("We're very sorry, but something went wrong: " + reason);
 				}
 			});
-
+*/
 		}
 	}
 }

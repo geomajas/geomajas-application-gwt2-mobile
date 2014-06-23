@@ -25,7 +25,6 @@ import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.handler.HammerHandler;
 import org.geomajas.hammergwt.client.impl.HammerGWT;
 import org.geomajas.hammergwt.client.impl.HammerTime;
-import org.mypackage.client.resource.MobileAppResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +63,9 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 		currentIndex = 0;
 
 		if(null == hammerTime) {
+			hammerTime = HammerGWT.createInstance(view.asWidget());
 
-			hammerTime = HammerGWT.on(view.asWidget(), new HammerHandler() {
+			HammerGWT.on(hammerTime, new HammerHandler() {
 
 				@Override
 				public void onHammerEvent(NativeHammerEvent event) {

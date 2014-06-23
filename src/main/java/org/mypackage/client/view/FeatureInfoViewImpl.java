@@ -94,7 +94,9 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 		recordsList.setRound(true);
 		content = new ScrollPanel();
 
-		HammerTime hammerTime = HammerGWT.on(content, new HammerHandler() {
+		HammerTime hammerTime = HammerGWT.createInstance(content);
+
+		HammerGWT.on(hammerTime, new HammerHandler() {
 
 			@Override
 			public void onHammerEvent(NativeHammerEvent event) {
@@ -121,8 +123,7 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 
 		hammerTime.setOption(GestureOptions.DRAG_MIN_DISTANCE, 10);
 
-
-		HammerGWT.on(headerPanel.asWidget(), new HammerHandler() {
+		HammerGWT.on(HammerGWT.createInstance(headerPanel.asWidget()), new HammerHandler() {
 
 			@Override
 			public void onHammerEvent(NativeHammerEvent event) {

@@ -38,8 +38,8 @@
             WEB-INF/layer/OSM/layerOsm.xml
 
             <!-- TMS layer -->
-            WEB-INF/layer/TMS/clientLayerSimplifiedCountriesTms.xml
-            WEB-INF/layer/TMS/layerSimplifiedCountriesTms.xml
+            <!--WEB-INF/layer/TMS/clientLayerSimplifiedCountriesTms.xml
+            WEB-INF/layer/TMS/layerSimplifiedCountriesTms.xml-->
 
             <!-- WMS layer -->
             WEB-INF/layer/WMS/clientLayerSimplifiedCountriesWms.xml
