@@ -11,38 +11,17 @@
 
 package org.mypackage.client.map;
 
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.core.client.Callback;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.ResizeLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
-import org.geomajas.geometry.Bbox;
-import org.geomajas.geometry.Coordinate;
 import org.geomajas.gwt2.client.GeomajasImpl;
 import org.geomajas.gwt2.client.GeomajasServerExtension;
-import org.geomajas.gwt2.client.controller.MapController;
 import org.geomajas.gwt2.client.event.MapInitializationEvent;
 import org.geomajas.gwt2.client.event.MapInitializationHandler;
-import org.geomajas.gwt2.client.map.MapConfiguration;
-import org.geomajas.gwt2.client.map.MapConfigurationImpl;
 import org.geomajas.gwt2.client.map.MapPresenter;
 import org.geomajas.gwt2.client.widget.DefaultMapWidget;
 import org.geomajas.gwt2.client.widget.MapLayoutPanel;
-import org.geomajas.hammergwt.client.handler.HammerTapHandler;
-import org.geomajas.plugin.tms.client.TmsClient;
-import org.geomajas.plugin.tms.client.configuration.TileMapInfo;
-import org.geomajas.plugin.tms.client.layer.TmsLayer;
-import org.geomajas.plugin.tms.client.layer.TmsLayerConfiguration;
-import org.geomajas.plugin.wms.client.WmsClient;
-import org.geomajas.plugin.wms.client.layer.WmsLayer;
-import org.geomajas.plugin.wms.client.layer.WmsLayerConfiguration;
-import org.geomajas.plugin.wms.client.service.WmsService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

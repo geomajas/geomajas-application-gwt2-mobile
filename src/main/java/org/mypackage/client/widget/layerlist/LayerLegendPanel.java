@@ -30,7 +30,7 @@ import org.geomajas.gwt2.client.event.LayerVisibilityMarkedEvent;
 import org.geomajas.gwt2.client.map.MapEventBus;
 import org.geomajas.gwt2.client.map.layer.Layer;
 import org.geomajas.gwt2.client.map.layer.LegendUrlSupported;
-import org.geomajas.gwt2.widget.client.map.WidgetMapResources;
+import org.geomajas.gwt2.client.widget.map.MapWidgetResource;
 
 /**
  * <p>
@@ -79,7 +79,7 @@ public class LayerLegendPanel extends Composite {
 	 *            The layer to display in this legend com.googlecode.mgwt.ui.client.widget.
 	 */
 	public LayerLegendPanel(MapEventBus eventBus, final Layer layer) {
-		WidgetMapResources.INSTANCE.css().ensureInjected();
+		((MapWidgetResource) GWT.create(MapWidgetResource.class)).css().ensureInjected();
 
 		this.layer = layer;
 		initWidget(UI_BINDER.createAndBindUi(this));

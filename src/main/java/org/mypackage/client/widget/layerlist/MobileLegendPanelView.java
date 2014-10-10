@@ -21,7 +21,6 @@ import org.geomajas.gwt2.client.event.LayerRemovedEvent;
 import org.geomajas.gwt2.client.event.MapCompositionHandler;
 import org.geomajas.gwt2.client.map.MapPresenter;
 import org.geomajas.gwt2.client.map.layer.Layer;
-import org.geomajas.gwt2.widget.client.map.LayerLegendPanel;
 
 /**
  * Legend panel that shows the legend for an entire map. It uses the {@link org.geomajas.gwt2.widget.client.map.LayerLegendPanel} to render the legends for

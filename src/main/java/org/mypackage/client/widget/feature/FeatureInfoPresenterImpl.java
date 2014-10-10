@@ -20,11 +20,11 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.FlowPanel;
 import org.geomajas.gwt2.client.map.feature.Feature;
 import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
+import org.geomajas.hammergwt.client.HammerGwt;
+import org.geomajas.hammergwt.client.HammerTime;
 import org.geomajas.hammergwt.client.event.EventType;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.handler.HammerHandler;
-import org.geomajas.hammergwt.client.impl.HammerGWT;
-import org.geomajas.hammergwt.client.impl.HammerTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,9 +63,9 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 		currentIndex = 0;
 
 		if(null == hammerTime) {
-			hammerTime = HammerGWT.createInstance(view.asWidget());
+			hammerTime = HammerGwt.create(view.asWidget());
 
-			HammerGWT.on(hammerTime, new HammerHandler() {
+			HammerGwt.on(hammerTime, new HammerHandler() {
 
 				@Override
 				public void onHammerEvent(NativeHammerEvent event) {

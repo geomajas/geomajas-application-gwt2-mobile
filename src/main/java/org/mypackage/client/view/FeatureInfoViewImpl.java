@@ -10,48 +10,23 @@
  */
 package org.mypackage.client.view;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
-import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
-import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
-import com.googlecode.mgwt.dom.client.recognizer.swipe.SwipeEndEvent;
-import com.googlecode.mgwt.dom.client.recognizer.swipe.SwipeEndHandler;
-import com.googlecode.mgwt.ui.client.widget.Button;
-import com.googlecode.mgwt.ui.client.widget.Carousel;
-import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.FormListEntry;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
 import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
 import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
 import com.googlecode.mgwt.ui.client.widget.ScrollPanel;
 import com.googlecode.mgwt.ui.client.widget.WidgetList;
-import com.googlecode.mgwt.ui.client.widget.buttonbar.ActionButton;
-import com.googlecode.mgwt.ui.client.widget.celllist.HasCellSelectedHandler;
-import com.googlecode.mgwt.ui.client.widget.event.scroll.ScrollMoveEvent;
-import com.googlecode.mgwt.ui.client.widget.event.scroll.ScrollStartEvent;
-import com.googlecode.mgwt.ui.client.widget.event.scroll.ScrollTouchEndEvent;
-import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
-import org.geomajas.gwt2.client.map.feature.Feature;
+import org.geomajas.hammergwt.client.HammerGwt;
+import org.geomajas.hammergwt.client.HammerTime;
 import org.geomajas.hammergwt.client.event.EventType;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.handler.HammerHandler;
-import org.geomajas.hammergwt.client.impl.HammerGWT;
-import org.geomajas.hammergwt.client.impl.HammerTime;
-import org.geomajas.hammergwt.client.impl.option.GestureOptions;
-import org.mypackage.client.widget.TouchBoard;
-import org.mypackage.client.widget.layerlist.LayerListView;
+import org.geomajas.hammergwt.client.option.GestureOptions;
 
 /**
  * default implementation of {@link FeatureInfoView}.
@@ -94,9 +69,9 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 		recordsList.setRound(true);
 		content = new ScrollPanel();
 
-		HammerTime hammerTime = HammerGWT.createInstance(content);
+		HammerTime hammerTime = HammerGwt.create(content);
 
-		HammerGWT.on(hammerTime, new HammerHandler() {
+		HammerGwt.on(hammerTime, new HammerHandler() {
 
 			@Override
 			public void onHammerEvent(NativeHammerEvent event) {
@@ -123,7 +98,7 @@ public class FeatureInfoViewImpl implements FeatureInfoView {
 
 		hammerTime.setOption(GestureOptions.DRAG_MIN_DISTANCE, 10);
 
-		HammerGWT.on(HammerGWT.createInstance(headerPanel.asWidget()), new HammerHandler() {
+		HammerGwt.on(HammerGwt.create(headerPanel.asWidget()), new HammerHandler() {
 
 			@Override
 			public void onHammerEvent(NativeHammerEvent event) {

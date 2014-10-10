@@ -14,18 +14,18 @@
 
 <!--	<inherits name='com.google.gwt.user.User'/>
 	<inherits name="com.google.gwt.user.theme.standard.Standard" />-->
+    <inherits name="com.google.gwt.user.User" />
+    <inherits name="com.googlecode.mgwt.MGWT" />
+    <inherits name="com.googlecode.mgwt.linker.Linker" />
 
 	<!-- Geomajas Client -->
 	<inherits name="org.geomajas.gwt2.GeomajasClientImpl" />
 	<inherits name="org.geomajas.gwt2.GeomajasClientServerExtension" />
-    <inherits name="org.geomajas.plugin.tms.GeomajasClientPluginTms"/>
+    <inherits name="org.geomajas.gwt2.plugin.tms.GeomajasClientPluginTms"/>
+    <inherits name="org.geomajas.gwt2.plugin.wms.GeomajasClientPluginWms"/>
 
 
-    <inherits name="com.google.gwt.user.User" />
-    <inherits name="org.geomajas.hammergwt.HammerGWT_Min" />
-    <inherits name="com.googlecode.mgwt.MGWT" />
-    <inherits name="com.googlecode.mgwt.linker.Linker" />
-    <inherits name="org.geomajas.plugin.wms.GeomajasClientPluginWms"/>
+    <inherits name="org.geomajas.hammergwt.HammerGwt" />
     <!-- 	<inherits name="com.googlecode.mgwt.theme.ExampleTheme"/> -->
 
 
@@ -61,6 +61,8 @@
     <set-configuration-property name="CssResource.obfuscationPrefix" value="gm"/>
     <set-property name="compiler.stackMode" value="strip"/>
     <set-configuration-property name="compiler.enum.obfuscate.names" value="true"/>
+
+	<collapse-all-properties/>
 
  <!--   <add-linker name="xsiframe"/>-->
     <!-- 	<set-configuration-property name="devModeRedirectEnabled" value="true"/> -->

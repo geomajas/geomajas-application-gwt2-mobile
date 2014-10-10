@@ -4,26 +4,16 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
-import com.googlecode.mgwt.dom.client.recognizer.swipe.SwipeEndEvent;
-import com.googlecode.mgwt.dom.client.recognizer.swipe.SwipeEndHandler;
-import com.googlecode.mgwt.dom.client.recognizer.swipe.SwipeEvent;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 import org.geomajas.configuration.AttributeInfo;
 import org.geomajas.gwt2.client.map.attribute.Attribute;
 import org.geomajas.gwt2.client.map.feature.Feature;
 import org.geomajas.gwt2.client.map.layer.VectorServerLayer;
-import org.geomajas.hammergwt.client.event.EventType;
-import org.geomajas.hammergwt.client.event.NativeHammerEvent;
-import org.geomajas.hammergwt.client.handler.HammerHandler;
-import org.geomajas.hammergwt.client.impl.HammerGWT;
 import org.mypackage.client.MobileAppFactory;
 import org.mypackage.client.animation.ActionNames;
 import org.mypackage.client.event.ActionEvent;
-import org.mypackage.client.view.CarouselRecord;
 import org.mypackage.client.view.FeatureInfoView;
 import org.mypackage.client.widget.feature.FeatureInfoPresenter;
-
-import java.util.Map;
 
 /**
  * Legend activity and presenter.

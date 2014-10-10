@@ -10,7 +10,6 @@
  */
 package org.mypackage.client.map;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.GestureChangeEvent;
@@ -33,21 +32,14 @@ import org.geomajas.gwt2.client.controller.MapController;
 import org.geomajas.gwt2.client.map.MapPresenter;
 import org.geomajas.gwt2.client.map.View;
 import org.geomajas.gwt2.client.map.ViewPort;
-import org.geomajas.gwt2.client.map.feature.Feature;
-import org.geomajas.gwt2.client.map.layer.FeaturesSupported;
+import org.geomajas.hammergwt.client.HammerTime;
+import org.geomajas.hammergwt.client.HammerGwt;
 import org.geomajas.hammergwt.client.event.EventType;
 import org.geomajas.hammergwt.client.event.NativeHammerEvent;
 import org.geomajas.hammergwt.client.event.PointerType;
 import org.geomajas.hammergwt.client.handler.HammerHandler;
-import org.geomajas.hammergwt.client.handler.HammerTapHandler;
-import org.geomajas.hammergwt.client.impl.HammerGWT;
-import org.geomajas.hammergwt.client.impl.HammerTime;
-import org.geomajas.hammergwt.client.impl.option.GestureOption;
-import org.geomajas.hammergwt.client.impl.option.GestureOptions;
+import org.geomajas.hammergwt.client.option.GestureOptions;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,9 +72,9 @@ public class MapHammerController implements MapController, HammerHandler {
 	public void onActivate(MapPresenter presenter) {
 		mapPresenter = presenter;
 
-		HammerTime hammerTime = HammerGWT.createInstance(presenter.asWidget());
+		HammerTime hammerTime = HammerGwt.create(presenter.asWidget());
 
-		HammerGWT.on(hammerTime, this,
+		HammerGwt.on(hammerTime, this,
 				EventType.PINCH, EventType.TOUCH, EventType.DRAG, EventType.DRAGSTART, EventType.TAP, EventType.HOLD);
 
 		hammerTime.setOption(GestureOptions.PREVENT_DEFAULT, true);

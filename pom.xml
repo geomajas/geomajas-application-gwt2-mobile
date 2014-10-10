@@ -48,17 +48,48 @@
 	</developers>
 	-->
 
+	<properties>
+		<!-- geomajas versions -->
+		<gwt2-mobile-quickstart-version-geomajas-build-tools>2.4.0</gwt2-mobile-quickstart-version-geomajas-build-tools>
+		<gwt2-mobile-quickstart-version-geomajas-client-gwt2>2.1.1</gwt2-mobile-quickstart-version-geomajas-client-gwt2>
+		<gwt2-mobile-quickstart-version-geomajas-hammer-gwt>1.0.0</gwt2-mobile-quickstart-version-geomajas-hammer-gwt>
+		<!-- gwt versions -->
+		<gwt2-mobile-quickstart-version-gwt>2.5.1</gwt2-mobile-quickstart-version-gwt>
+		<gwt2-mobile-quickstart-version-mgwt>1.1.2</gwt2-mobile-quickstart-version-mgwt>
+		<gwt.compiler.skip>false</gwt.compiler.skip>
+		<!-- other versions -->
+		<gwt2-mobile-quickstart-version-geotools>9.5</gwt2-mobile-quickstart-version-geotools>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
-		<dependency>
-			<groupId>org.geomajas.project</groupId>
-			<artifactId>geomajas-project-client-gwt2</artifactId>
-			<version>${geomajas-client-gwt2-version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
+			<dependency>
+				<groupId>org.geomajas.project</groupId>
+				<artifactId>geomajas-project-client-gwt2</artifactId>
+				<version>${gwt2-mobile-quickstart-version-geomajas-client-gwt2}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.geomajas.hammergwt</groupId>
+				<artifactId>geomajas-project-hammer-gwt</artifactId>
+				<version>${gwt2-mobile-quickstart-version-geomajas-hammer-gwt}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.googlecode.mgwt</groupId>
+				<artifactId>mgwt</artifactId>
+				<version>${gwt2-mobile-quickstart-version-mgwt}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-wfs</artifactId>
+				<version>${gwt2-mobile-quickstart-version-geotools}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<dependencies>
 		<!-- Geomajas dependencies -->
 		<dependency>
@@ -101,21 +132,17 @@
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-layer-openstreetmap</artifactId>
 		</dependency>
-        <!--<dependency>
-            <groupId>org.geomajas.plugin</groupId>
-            <artifactId>geomajas-layer-tms</artifactId>
-        </dependency>-->
-
-
+		<dependency>
+			<groupId>org.geomajas.plugin</groupId>
+			<artifactId>geomajas-client-gwt2-plugin-tms</artifactId>
+		</dependency>
         <dependency>
             <groupId>org.geomajas.plugin</groupId>
             <artifactId>geomajas-client-gwt2-plugin-wms</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-wfs</artifactId>
-            <version>${geotools-version}</version>
+            <groupId>org.geomajas.plugin</groupId>
+            <artifactId>geomajas-client-gwt2-plugin-corewidget</artifactId>
         </dependency>
 
 		<!-- Hibernate layer can be removed if not needed, but the "Road" class needs the Hibernate stuff -->
@@ -124,11 +151,6 @@
 			<artifactId>geomajas-layer-hibernate</artifactId>
 		</dependency>
 
-
-        <dependency>
-            <groupId>org.geomajas.plugin</groupId>
-            <artifactId>geomajas-client-gwt2-plugin-corewidget</artifactId>
-        </dependency>
 		<!-- uncomment if you want to use Hibernate with postgis, for another db you will need similar dependencies -->
 		<!-- (see also web.xml for changing the configuration) -->
 		<!--
@@ -184,7 +206,7 @@
 		<dependency>
 			<groupId>org.geotools.jdbc</groupId>
 			<artifactId>gt-jdbc-sqlserver</artifactId>
-			<version>${geotools-version}</version>
+			<version>${gwt2-mobile-quickstart-version-geotools}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
@@ -192,7 +214,6 @@
 			<version>4.0</version>
 		</dependency>
 		-->
-
 
 		<!-- Google dependencies -->
 		<dependency>
@@ -224,32 +245,23 @@
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 
-        <dependency>
-            <groupId>org.geomajas.plugin</groupId>
-            <artifactId>geomajas-client-gwt2-plugin-tms</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- mobile gwt-->
         <dependency>
             <groupId>com.googlecode.mgwt</groupId>
             <artifactId>mgwt</artifactId>
-            <version>1.1.2</version>
         </dependency>
 
         <!--  hammer gwt-->
         <dependency>
             <groupId>org.geomajas.hammergwt</groupId>
-            <artifactId>geomajas-project-hammer-gwt-impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>geomajas-project-hammer-gwt</artifactId>
         </dependency>
 
-        <!-- include proxy controller -->
-     <!--   <dependency>
-            <groupId>org.geomajas</groupId>
-            <artifactId>geomajas-client-gwt2-example-base</artifactId>
-        </dependency>
--->
+        <!-- other dependencies -->
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-wfs</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -358,17 +370,17 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>${gwt-version}</version>
+				<version>${gwt2-mobile-quickstart-version-gwt}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.google.gwt</groupId>
                         <artifactId>gwt-user</artifactId>
-                        <version>${gwt-version}</version>
+                        <version>${gwt2-mobile-quickstart-version-gwt}</version>
                     </dependency>
                     <dependency>
                         <groupId>com.google.gwt</groupId>
                         <artifactId>gwt-dev</artifactId>
-                        <version>${gwt-version}</version>
+                        <version>${gwt2-mobile-quickstart-version-gwt}</version>
                     </dependency>
                 </dependencies>
 				<configuration>
@@ -465,7 +477,7 @@
 											gwt-maven-plugin
 										</artifactId>
 										<versionRange>
-											[${gwt-version},)
+											[${gwt2-mobile-quickstart-version-gwt},)
 										</versionRange>
 										<goals>
 											<goal>compile</goal>
@@ -497,7 +509,7 @@
 				<dependency>
 					<groupId>org.geomajas</groupId>
 					<artifactId>geomajas-jetty-runner</artifactId>
-					<version>${geomajas-build-tools-version}</version>
+					<version>${gwt2-mobile-quickstart-version-geomajas-build-tools}</version>
 				</dependency>
 				<dependency>
 					<groupId>com.google.gwt</groupId>
@@ -541,6 +553,7 @@
 		</repository>
 		-->
 	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>Geomajas</id>
@@ -548,14 +561,5 @@
 			<url>http://maven.geomajas.org/</url>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<properties>
-		<geotools-version>9.5</geotools-version>
-		<gwt-version>2.5.0</gwt-version>
-		<geomajas-build-tools-version>2.0.0</geomajas-build-tools-version>
-		<geomajas-client-gwt2-version>2.1.0-SNAPSHOT</geomajas-client-gwt2-version>
-		<gwt.compiler.skip>false</gwt.compiler.skip>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 </project>
