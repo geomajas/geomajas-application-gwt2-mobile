@@ -441,29 +441,7 @@
 							<cargo.remote.uri>${dev.deploy.uri}</cargo.remote.uri>
 						</properties>
 					</configuration>
-					<deployer>
-						<deployables>
-							<deployable>
-								<groupId>org.mypackage</groupId>
-								<artifactId>myartifact</artifactId>
-								<type>war</type>
-								<properties>
-									<context>enduser-application-gwt2-trunk</context>
-								</properties>
-							</deployable>
-						</deployables>
-					</deployer>
-
 				</configuration>
-				<executions>
-					<execution>
-						<id>redeploy</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>redeploy</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 
