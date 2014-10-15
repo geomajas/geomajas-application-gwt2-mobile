@@ -24,7 +24,7 @@
             classpath:org/geomajas/plugin/rasterizing/DefaultRasterizedPipelines.xml
 
             <!-- infinispan cache location -->
-            classpath:org/mypackage/spring/cacheLocation.xml
+            classpath:org/geomajas/quickstart/gwt2mobile/spring/cacheLocation.xml
 
             <!-- local application context -->
 
@@ -125,7 +125,7 @@
     <!-- remote logging -->
     <servlet>
         <servlet-name>remoteLogging</servlet-name>
-        <servlet-class>org.mypackage.server.RemoteSLF4j</servlet-class>
+        <servlet-class>org.geomajas.quickstart.gwt2mobile.server.RemoteSLF4j</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>remoteLogging</servlet-name>
