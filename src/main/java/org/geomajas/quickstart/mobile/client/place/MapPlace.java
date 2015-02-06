@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -19,6 +19,9 @@ import com.google.gwt.place.shared.PlaceTokenizer;
  */
 public class MapPlace extends Place {
 
+	/**
+	 * TODO.
+	 */
 	public static class MapPlaceTokenizer implements PlaceTokenizer<MapPlace> {
 
 		@Override
@@ -40,13 +43,16 @@ public class MapPlace extends Place {
 
 	@Override
 	public boolean equals(Object other) {
-		if (other == this)
+		if (other == this) {
 			return true;
-		if (other == null)
+		}
+		if (other == null) {
 			return false;
+		}
 
-		if (other instanceof MapPlace)
+		if (other instanceof MapPlace) {
 			return true;
+		}
 		return false;
 	}
 }

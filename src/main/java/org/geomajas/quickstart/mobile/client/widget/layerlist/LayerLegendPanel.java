@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -34,12 +34,14 @@ import org.geomajas.gwt2.client.widget.map.MapWidgetResource;
 
 /**
  * <p>
- * A com.googlecode.mgwt.ui.client.widget that displays the legend for a single layer. It provides the possibility to toggle that layer's visibility
+ * A com.googlecode.mgwt.ui.client.widget that displays the legend for a single layer.
+ * It provides the possibility to toggle that layer's visibility
  * through a CheckBox.
  * </p>
  * <p>
  * If the layer should become invisible because the map has zoomed in or out beyond the allowed scale range (for that
- * layer), the CheckBox in this com.googlecode.mgwt.ui.client.widget will automatically become disabled. It is no use to start marking a layer visible
+ * layer), the CheckBox in this com.googlecode.mgwt.ui.client.widget will automatically become disabled.
+ * It is no use to start marking a layer visible
  * when it won't appear anyway.
  * </p>
  * 
@@ -50,7 +52,9 @@ import org.geomajas.gwt2.client.widget.map.MapWidgetResource;
 public class LayerLegendPanel extends Composite {
 
 	/**
-	 * UI binder definition for the {@link org.geomajas.quickstart.mobile.client.widget.layerlist.LayerLegendPanel} com.googlecode.mgwt.ui.client.widget.
+	 * UI binder definition for the
+	 * {@link org.geomajas.quickstart.mobile.client.widget.layerlist.LayerLegendPanel}
+	 * com.googlecode.mgwt.ui.client.widget.
 	 * 
 	 * @author Pieter De Graef
 	 */

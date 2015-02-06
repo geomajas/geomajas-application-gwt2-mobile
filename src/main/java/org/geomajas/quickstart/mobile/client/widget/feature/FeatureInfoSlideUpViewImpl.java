@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -12,11 +12,18 @@ package org.geomajas.quickstart.mobile.client.widget.feature;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.ButtonBase;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.ui.client.dialog.SlideUpPanel;
 import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
 import org.geomajas.quickstart.mobile.client.resource.MobileAppResource;
 
+/**
+ * TODO.
+ *
+ * @author Dosi Bingov
+ */
 public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView  {
 	private com.googlecode.mgwt.ui.client.widget.HeaderPanel widget;
 	private FlowPanel label;
@@ -97,6 +104,11 @@ public class FeatureInfoSlideUpViewImpl implements FeatureInfoSlideUpView  {
 		return goRight;
 	}
 
+	/**
+	 * TODO.
+	 *
+	 * @author Dosi Bingov
+	 */
 	class FeatureInfoButton extends ButtonBase {
 		public FeatureInfoButton() {
 			super(Document.get().createPushButtonElement());

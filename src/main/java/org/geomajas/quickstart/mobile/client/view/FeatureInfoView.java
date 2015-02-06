@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -13,12 +13,22 @@ package org.geomajas.quickstart.mobile.client.view;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.googlecode.mgwt.dom.client.event.tap.HasTapHandlers;
 
-public interface FeatureInfoView extends IsWidget{
+/**
+ * TODO.
+ *
+ * @author Dosi Bingov
+ */
+public interface FeatureInfoView extends IsWidget {
 
 	void clear();
 
 	void setDragDownHandler(DragDownHandler dragDownHandler);
 
+	/**
+	 * TODO.
+	 *
+	 * @author Dosi Bingov
+	 */
 	interface DragDownHandler {
 		void onDragDown();
 	}
@@ -36,11 +46,21 @@ public interface FeatureInfoView extends IsWidget{
 
 	void setDragRightHandler(DragRightHandler dragRightHandler);
 
+	/**
+	 * TODO.
+	 *
+	 * @author Dosi Bingov
+	 */
 	interface DragLeftHandler {
 		void onDragLeft();
 	}
 
 
+	/**
+	 * TODO.
+	 *
+	 * @author Dosi Bingov
+	 */
 	interface DragRightHandler {
 		void onDragRight();
 	}

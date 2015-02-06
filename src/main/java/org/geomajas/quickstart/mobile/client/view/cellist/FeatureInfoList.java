@@ -1,4 +1,14 @@
 /*
+ * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
+ *
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
+ *
+ * The program is available in open source according to the GNU Affero
+ * General Public License. All contributions in this program are covered
+ * by the Geomajas Contributors License Agreement. For full licensing
+ * details, see LICENSE.txt in the project root.
+ */
+/*
  * Copyright 2010 Daniel Kurka
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -22,22 +32,26 @@ import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
 
 /**
  * @author Dosi Bingov
- * 
+ * @param <T>
  */
 public abstract class FeatureInfoList<T> implements Cell<T> {
 
-  private static Template TEMPLATE = GWT.create(Template.class);
+	private static Template template = GWT.create(Template.class);
 
-  private String styleName;
+	private String styleName;
 
-  public FeatureInfoList() {
-    styleName = "";
-  }
+	public FeatureInfoList() {
+		  styleName = "";
+	}
 
+	/**
+	 * TODO.
+	 *
+	 * @author Dosi Bingov
+	 */
   public interface Template extends SafeHtmlTemplates {
-    @Template("<div>{0}</div>")
-    SafeHtml content(String recordString);
-
+	  @Template("<div>{0}</div>")
+	  SafeHtml content(String recordString);
   }
 
   @Override
@@ -45,8 +59,7 @@ public abstract class FeatureInfoList<T> implements Cell<T> {
 	  final MCheckBox mCheckBox1 = new MCheckBox();
 	  // mCheckBox1.setText("again");
 	  mCheckBox1.setImportant(true);
-      safeHtmlBuilder.append(TEMPLATE.content(getDisplayString(model)));
-
+	  safeHtmlBuilder.append(template.content(getDisplayString(model)));
   }
 
   public abstract String getDisplayString(T model);
@@ -55,14 +68,15 @@ public abstract class FeatureInfoList<T> implements Cell<T> {
 
   @Override
   public boolean canBeSelected(T model) {
-    return false;
+	  return false;
   }
 
+
   public void setStylename(String name) {
-    if (name == null) {
-      name = "";
-    }
-    styleName = name;
+	  if (name == null) {
+		  name = "";
+	  }
+	  styleName = name;
   }
 
 }

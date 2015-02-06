@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -54,7 +54,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Mobile map activity and presenter
+ * Mobile map activity and presenter.
+ *
+ * @author Dosi Bingov
  */
 public class MobileMapActivity extends MGWTAbstractActivity implements MobileMapPresenter {
 
@@ -74,12 +76,13 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
   @Override
   public void start(AcceptsOneWidget panel, final EventBus eventBus) {
 
-    addHandlerRegistration(mapView.getLegendButton().addTapHandler(new TapHandler() {
+	  addHandlerRegistration(mapView.getLegendButton().addTapHandler(new TapHandler() {
 
 		@Override
 		public void onTap(TapEvent event) {
 			ViewChangeEvent.fire(eventBus, ViewChangeEvent.VIEW.LEGEND);
-		}
+
+			}
 
 	}));
 
@@ -133,7 +136,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 
 			  int index = viewPort.getResolutionIndex(viewPort.getResolution());
 			  if (index > 0) {
-				  viewPort.registerAnimation(NavigationAnimationFactory.createZoomOut(mapView.getMap().getMapPresenter()));
+				  viewPort.registerAnimation(
+						  NavigationAnimationFactory.createZoomOut(mapView.getMap().getMapPresenter()));
 			  }
 		  }
 	  });
@@ -160,7 +164,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 		MapPresenter mapPresenter = mapView.getMap().getMapPresenter();
 
 		GeomajasServerExtension.getInstance().getServerFeatureService().search(mapPresenter, point,
-				calculateBufferFromPixelTolerance(7), ServerFeatureService.QueryType.INTERSECTS, ServerFeatureService.SearchLayerType.SEARCH_ALL_LAYERS, -1,
+				calculateBufferFromPixelTolerance(7),
+				ServerFeatureService.QueryType.INTERSECTS, ServerFeatureService.SearchLayerType.SEARCH_ALL_LAYERS, -1,
 				new FeatureMapFunction() {
 
 					@Override
@@ -188,6 +193,11 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 	}
 
 
+	/**
+	 * TODO.
+	 *
+	 * @author Dosi Bingov
+	 */
 	private class MapActivityAnimationEndHandler implements MGWTAnimationEndHandler {
 
 		@Override
@@ -208,7 +218,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 					Position.Coordinates coord = result.getCoordinates();
 					TransformGeometryRequest req = new TransformGeometryRequest();
 					Geometry point = new Geometry(Geometry.POINT, 4326, -1);
-					point.setCoordinates(new Coordinate[] { new Coordinate(coord.getLongitude(), coord.getLatitude()) });
+					point.setCoordinates(new Coordinate[] {
+							new Coordinate(coord.getLongitude(), coord.getLatitude()) });
 					GWT.log("Browser geolocation coords " + new Coordinate(coord.getLongitude(), coord.getLatitude()));
 					req.setGeometry(point);
 
@@ -235,7 +246,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 								double res = mapView.getMap().getMapPresenter().getViewPort().getResolution();
 
 								double crr = mapView.getMap().getMapPresenter().getViewPort().getResolution(co + 3);
-								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0], crr));
+								mapView.getMap().getMapPresenter().getViewPort().
+								applyView(new View(geom.getCoordinates()[0], crr));
 */
 
 								//Coordinate c = geom.getCoordinates()[0];
@@ -250,7 +262,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 
 							/*	double minRes = mapView.getMap().getMapPresenter().getViewPort().getResolution(5);
 
-								mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
+								mapView.getMap().getMapPresenter().getViewPort().
+								applyView(new View(geom.getCoordinates()[0],
 										minRes));
 */
 
@@ -259,7 +272,8 @@ public class MobileMapActivity extends MGWTAbstractActivity implements MobileMap
 							/*   double resApply = mapView.getMap().getMapPresenter().getViewPort().getResolution(19);
 							   mapView.getMap().getMapPresenter().getViewPort().applyResolution(resApply);*/
 
-							/*	mapView.getMap().getMapPresenter().getViewPort().applyView(new View(geom.getCoordinates()[0],
+							/*	mapView.getMap().getMapPresenter().getViewPort().
+							applyView(new View(geom.getCoordinates()[0],
 										resApply));*/
 
 

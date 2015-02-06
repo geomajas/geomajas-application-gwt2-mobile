@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -81,7 +81,8 @@ public class MobileEntryPoint implements EntryPoint {
 
 		PhoneAnimationMapper appAnimationMapper = new PhoneAnimationMapper();
 
-		AnimatingActivityManager activityManager = new AnimatingActivityManager(appActivityMapper, appAnimationMapper, mobileAppFactory.getEventBus());
+		AnimatingActivityManager activityManager =
+				new AnimatingActivityManager(appActivityMapper, appAnimationMapper, mobileAppFactory.getEventBus());
 		activityManager.setFireAnimationEvents(true);
 
 
