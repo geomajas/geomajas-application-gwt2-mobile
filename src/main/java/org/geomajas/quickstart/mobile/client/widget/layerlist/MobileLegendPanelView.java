@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -23,10 +23,12 @@ import org.geomajas.gwt2.client.map.MapPresenter;
 import org.geomajas.gwt2.client.map.layer.Layer;
 
 /**
- * Legend panel that shows the legend for an entire map. It uses the {@link org.geomajas.gwt2.widget.client.map.LayerLegendPanel} to render the legends for
+ * Legend panel that shows the legend for an entire map. It uses the
+ * {@link org.geomajas.gwt2.widget.client.map.LayerLegendPanel} to render the legends for
  * individual layers. This com.googlecode.mgwt.ui.client.widget will keep track of the layers in the map's
  * {@link org.geomajas.gwt2.client.map.layer.LayersModel}. If a new layer is added or layer is removed from the map,
- * this com.googlecode.mgwt.ui.client.widget will change the legend accordingly. Also if the order of layers change, this com.googlecode.mgwt.ui.client.widget will change
+ * this com.googlecode.mgwt.ui.client.widget will change the legend accordingly.
+ * Also if the order of layers change, this com.googlecode.mgwt.ui.client.widget will change
  * accordingly.
  *
  * @author Pieter De Graef

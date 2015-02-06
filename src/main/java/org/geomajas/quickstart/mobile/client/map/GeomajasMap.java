@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -30,9 +30,11 @@ import java.util.logging.Logger;
  * @author Dosi Bingov
  */
 public class GeomajasMap implements IsWidget {
-    private Logger remoteLogger = Logger.getLogger("");
+	private Logger remoteLogger = Logger.getLogger("");
 
-	private static final String TMS_BASE_URL = "http://apps.geomajas.org/geoserver/gwc/service/tms/1.0.0/demo_world%3Asimplified_country_borders@EPSG%3A900913@png";
+	private static final String TMS_BASE_URL =
+			"http://apps.geomajas.org/geoserver/gwc/service/tms/1.0.0/" +
+					"demo_world%3Asimplified_country_borders@EPSG%3A900913@png";
 
 	private static final String WMS_BASE_URL = "http://apps.geomajas.org/geoserver/demo_world/ows";
 
@@ -53,7 +55,7 @@ public class GeomajasMap implements IsWidget {
 		mapPresenter = GeomajasImpl.getInstance().createMapPresenter();
 
 
-		mapPresenter.setSize(300,300);
+		mapPresenter.setSize(300, 300);
 		//mapPresenter = GeomajasImpl.getInstance().createMapPresenter(configuration, 480, 480);
 
 		mapPresenter.getEventBus().addMapInitializationHandler(new MyMapInitializationHandler());
@@ -66,7 +68,8 @@ public class GeomajasMap implements IsWidget {
 
 
 		// Initialize the map server side
-		GeomajasServerExtension.getInstance().initializeMap(mapPresenter, "app", "mapLayerVisibility", new DefaultMapWidget[] {});
+		GeomajasServerExtension.getInstance().initializeMap(mapPresenter,
+				"app", "mapLayerVisibility", new DefaultMapWidget[] {});
 
 
 		initializeMap();
@@ -115,7 +118,8 @@ public class GeomajasMap implements IsWidget {
 			//MapPresenter mapPres = event.getMapPresenter();
 
 			// Create the configuration objects:
-//			TileConfiguration tileConfig = new TileConfiguration(256, 256, new Coordinate(-180, -90), mapPresenter.getViewPort());
+//			TileConfiguration tileConfig = new TileConfiguration(256, 256,
+// new Coordinate(-180, -90), mapPresenter.getViewPort());
 //			TmsLayerConfiguration layerConfig = new TmsLayerConfiguration();
 //			layerConfig.setBaseUrl(TMS_BASE_URL);
 //			layerConfig.setFileExtension(".png");

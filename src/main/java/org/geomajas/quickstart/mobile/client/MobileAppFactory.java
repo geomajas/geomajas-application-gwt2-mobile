@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -30,25 +30,24 @@ import org.geomajas.quickstart.mobile.client.widget.layerlist.LayerListView;
  * 
  */
 public interface MobileAppFactory {
-	public EventBus getEventBus();
+	EventBus getEventBus();
 
-	public PlaceController getPlaceController();
+	PlaceController getPlaceController();
 
 	/**
 	 * @return
 	 */
-	public MobileMapView getMapView();
+	MobileMapView getMapView();
 
- 	public LegendView getLegendView();
+ 	LegendView getLegendView();
 
-	public LayerListView getlayerListView();
+	LayerListView getlayerListView();
 
-	public FeatureInfoSlideUpView getFeatureInfoSlideView();
+	FeatureInfoSlideUpView getFeatureInfoSlideView();
 
-	public FeatureInfoView getFeatureInfoView();
+	FeatureInfoView getFeatureInfoView();
 
-	public FeatureInfoPresenter getFeaturePresenter();
-
+	FeatureInfoPresenter getFeaturePresenter();
 
 	FormsView geFormsView();
 

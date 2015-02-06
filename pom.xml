@@ -2,7 +2,7 @@
 <!--
   ~ This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
   ~
-  ~ Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+  ~ Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
   ~
   ~ The program is available in open source according to the GNU Affero
   ~ General Public License. All contributions in this program are covered
@@ -50,8 +50,8 @@
 
 	<properties>
 		<!-- geomajas versions -->
-		<gwt2-mobile-quickstart-version-geomajas-build-tools>2.4.0</gwt2-mobile-quickstart-version-geomajas-build-tools>
-		<gwt2-mobile-quickstart-version-geomajas-client-gwt2>2.1.1</gwt2-mobile-quickstart-version-geomajas-client-gwt2>
+		<gwt2-mobile-quickstart-version-geomajas-build-tools>2.5.0</gwt2-mobile-quickstart-version-geomajas-build-tools>
+		<gwt2-mobile-quickstart-version-geomajas-client-gwt2>2.2.0</gwt2-mobile-quickstart-version-geomajas-client-gwt2>
 		<gwt2-mobile-quickstart-version-geomajas-hammer-gwt>1.0.0</gwt2-mobile-quickstart-version-geomajas-hammer-gwt>
 		<!-- gwt versions -->
 		<gwt2-mobile-quickstart-version-gwt>2.5.1</gwt2-mobile-quickstart-version-gwt>
@@ -323,13 +323,13 @@
 			</plugin>
 
 			<!-- adhere to Geomajas checkstyle configuration -->
-			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.5-DF</version>
 				<configuration>
 					<configLocation>config/geomajas-checkstyle.xml</configLocation>
+					<logViolationsToConsole>true</logViolationsToConsole>
 				</configuration>
 				<executions>
 					<execution>
@@ -343,11 +343,10 @@
 					<dependency>
 						<groupId>org.geomajas</groupId>
 						<artifactId>geomajas-checkstyle</artifactId>
-						<version>1.0.6</version>
+						<version>${gwt2-mobile-quickstart-version-geomajas-build-tools}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
-			-->
 
 			<!-- Run the application using "mvn jetty:run" -->
 			<plugin>

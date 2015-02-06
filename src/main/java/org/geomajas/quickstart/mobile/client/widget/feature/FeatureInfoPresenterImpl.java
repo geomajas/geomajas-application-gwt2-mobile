@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -30,6 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * TODO.
+ *
+ * @author Dosi Bingov
+ */
 public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 
 	private FeatureInfoSlideUpView view;
@@ -62,7 +67,7 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 
 		currentIndex = 0;
 
-		if(null == hammerTime) {
+		if (null == hammerTime) {
 			hammerTime = HammerGwt.create(view.asWidget());
 
 			HammerGwt.on(hammerTime, new HammerHandler() {
@@ -101,7 +106,7 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 								.setHeight(0, Style.Unit.PX);
 					}
 
-					if (null!= featureList && featureList.size() > 0) {
+					if (null != featureList && featureList.size() > 0) {
 
 						if (event.getType() == EventType.DRAGRIGHT) {
 							if (shiftToNextFeature()) {
@@ -208,7 +213,7 @@ public class FeatureInfoPresenterImpl implements FeatureInfoPresenter {
 		span.setInnerHTML(f.getLayer().getTitle());
 		span.getStyle().setFontSize(15, Style.Unit.PX);
 
-		return f.getLabel() + " (" + (currentIndex + 1) + "/" + featureList.size() + ")" +"<br />"
+		return f.getLabel() + " (" + (currentIndex + 1) + "/" + featureList.size() + ")" + "<br />"
 				+ span.getString();
 	}
 

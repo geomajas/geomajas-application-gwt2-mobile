@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -52,7 +52,8 @@ public class AppHistoryObserver implements HistoryObserver {
 	@Override
 	public HandlerRegistration bind(EventBus eventBus, final HistoryHandler historyHandler) {
 
-		HandlerRegistration viewChangeHandler = eventBus.addHandler(ViewChangeEvent.getType(), new ViewChangeEvent.Handler() {
+		HandlerRegistration viewChangeHandler = eventBus.addHandler(ViewChangeEvent.getType(),
+				new ViewChangeEvent.Handler() {
 
 					@Override
 					public void onViewChange(ViewChangeEvent event) {
@@ -103,7 +104,8 @@ public class AppHistoryObserver implements HistoryObserver {
 			}
 		});
 
-		HandlerRegistration register = ActionEvent.register(eventBus, ActionNames.ANIMATION_END, new ActionEvent.Handler() {
+		HandlerRegistration register = ActionEvent.register(eventBus,
+				ActionNames.ANIMATION_END, new ActionEvent.Handler() {
 
 			@Override
 			public void onAction(ActionEvent event) {

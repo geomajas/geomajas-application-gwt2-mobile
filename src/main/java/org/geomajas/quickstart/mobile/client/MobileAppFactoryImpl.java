@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -13,7 +13,12 @@ package org.geomajas.quickstart.mobile.client;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
-import org.geomajas.quickstart.mobile.client.view.*;
+import org.geomajas.quickstart.mobile.client.view.FeatureInfoView;
+import org.geomajas.quickstart.mobile.client.view.FeatureInfoViewImpl;
+import org.geomajas.quickstart.mobile.client.view.LegendView;
+import org.geomajas.quickstart.mobile.client.view.LegendViewImpl;
+import org.geomajas.quickstart.mobile.client.view.MobileMapView;
+import org.geomajas.quickstart.mobile.client.view.MobileMapViewImpl;
 import org.geomajas.quickstart.mobile.client.view.tst.FormsView;
 import org.geomajas.quickstart.mobile.client.view.tst.FormsViewGwtImpl;
 import org.geomajas.quickstart.mobile.client.widget.feature.FeatureInfoPresenter;

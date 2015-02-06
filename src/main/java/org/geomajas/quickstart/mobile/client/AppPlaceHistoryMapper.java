@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -24,6 +24,6 @@ import org.geomajas.quickstart.mobile.client.view.tst.FormsPlace;
  * 
  */
 @WithTokenizers({ MapPlace.MapPlaceTokenizer.class, LegendPlace.Tokenizer.class, FeatureInfoPlace.Tokenizer.class,
-		FormsPlace.Tokenizer.class})
+		FormsPlace.Tokenizer.class })
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }
